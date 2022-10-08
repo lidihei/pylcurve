@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Fits light-curve to a model with a sphere plus Roche-lobe distorted star</title>
+<link rel=stylesheet href="style.css" type="text/css">
+</head>
+<body>
+
+
+<p>
+<h1>Fits light-curve to a model with a sphere plus Roche-lobe distorted star using simplex method</h1>
+<p>
+Using a file of supplied parameter values, <strong>simplex</strong> tries to optimise the fit between
+a light curve and a model of a spherical and tidally distorted star. This is 
+supposed to model a white dwarf/main-sequence binary such as NN Ser. It includes
+reprocessing and eclipses. The reprocessing is computed using the simple addition of
+fluxes method, assuming that the irradiating star can be treated as a point, and not 
+including any 'back heating'. Phase 0 is defined as the point when star 1 is furthest from the observer.
+Star 1 is the spherical one. Efforts are made to save time by using a coarser grid away from eclipse
+and using no sub-division for these phases. This comes with some danger, mainly of discontinuities
+at the cross over points. A rescaling is computed from the values of each grid at a cross-over point.
+They should be close to 1. Setting all the element sizes to the same value will avoid any such problem, 
+but will be slow.
+<p>
+The minimisation uses the simplex method via the Numerical Recipes routine 'amoeba' which works with 
+a group of N+1 points in N dimensional space and moves the points around to move downhill in chi**2.
+It is slow but robust.
+<p>
+<table>
+<tr valign="top"><td><i>model</i></td><td>---</td><td>A file of initial parameter values, ranges to vary, step sizes for derivative computations
+and an indication of whether they should be varied or not for physical parameters and name = value for others. 
+See <a href="lroche">lroche</a> for a full description of these. The range parameters are used to set the initial
+'amoeba'.</td></tr>
+<tr valign="top"><td><i>data</i></td><td>---</td><td>A light curve of times, exposure times, fluxes and uncertainties. # or blank to ignore,
+negative errors ro mask.</td></tr>
+<tr valign="top"><td><i>ftol</i></td><td>---</td><td>Once the N+1 corners are all within a fraction ftol of each other the routine will stop.</td></tr>
+<tr valign="top"><td><i>nmax</i></td><td>---</td><td>The routine will also stop if there have this many model evaluations</td></tr>
+<tr valign="top"><td><i>output</i></td><td>---</td><td>The file to store the final best model in</td></tr>
+</table>
+<p>
+
+
+<h2>Classes</h2>
+
+<p>
+This command is a member of the class: <a href="Model.html">Model</a>.
+
+<p>
+Author: T.R.Marsh<br>
+Created: 24 June 2005<br>
+Revised: 11 August 2005<br>
+
+<p>
+<hr>
+<address>Page generated Sat Oct  1 00:27:25 2022</address>
+</body>
+</html>

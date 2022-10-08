@@ -1,0 +1,3 @@
+#!/bin/bash
+
+python tsigma.py example_model_file example_data_file 0.00001

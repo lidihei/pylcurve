@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>Computes the line profile from irradiated face of a Roche distorted star</title>
+<link rel=stylesheet href="style.css" type="text/css">
+</head>
+<body>
+
+
+<p>
+<h1>Computes the line profile from a Roche distorted star</h1>
+<p>
+<strong>lprofile</strong> computes the line profile from a Roche distorted
+star, allowing for irradiation of one face.  The radiation from the
+star is modelled as a slab of constant optical depth with a source
+function that changes exponentially with depth. This allows one to
+have a continuous transition from optically thin to thick and have
+limb darkening or brightening. The computation is carried out for the
+secondary star only.
+<p>
+<table>
+<tr valign="top"><td><i>model</i></td><td>---</td><td>File of parameters specifying the parameters. See <a href="lroche.html">lroche</a> for a full description of these.</td></tr>
+<tr valign="top"><td><i>tau</i></td><td>---</td><td>Total vertical optical depth of emitting layer. Allows one to simulate optically thin (tau << 1) and 
+optically thick (tau >> 1) cases.</td></tr>
+<tr valign="top"><td><i>efac</i></td><td>---</td><td>Source function changes as exp(efac*tau). This must be less than 1. efac > 0 is equivalent to the usual 
+limb darkened case. efac < 0 implies limb brightening.</td></tr>
+<tr valign="top"><td><i>aline</i></td><td>---</td><td>Parameter controlling strength of absorption line which will have limb and gravity darkening as defined by 
+the model file, i.e. it is assumed to be of constant equivalent width, which may not be accurate of course.</td></tr>
+<tr valign="top"><td><i>nphase</i></td><td>---</td><td>number of phases</td></tr>
+<tr valign="top"><td><i>phase</i></td><td>---</td><td>Phase to compute (if nphase == 1)</td></tr>
+<tr valign="top"><td><i>phase1</i></td><td>---</td><td>First phase to compute (nphase > 1)</td></tr>
+<tr valign="top"><td><i>phase2</i></td><td>---</td><td>Last phase to compute (nphase > 1)</td></tr>
+<tr valign="top"><td><i>store</i></td><td>---</td><td>molly file to store results (nphase > 1)</td></tr>
+<tr valign="top"><td><i>expose</i></td><td>---</td><td>Length of exposure in terms of orbital phase</td></tr>
+<tr valign="top"><td><i>ndiv</i></td><td>---</td><td>Number of sub-divisions to account for finite exposures. The results will be trapezoidally
+integrated over the length of the exposure.</td></tr>
+<tr valign="top"><td><i>v1</i></td><td>---</td><td>left hand edge of profile array (same units as vscale)</td></tr>
+<tr valign="top"><td><i>v2</i></td><td>---</td><td>right hand edge of profile array (same units as vscale)</td></tr>
+<tr valign="top"><td><i>nbin</i></td><td>---</td><td>number of velocity bins</td></tr>
+<tr valign="top"><td><i>fwhm</i></td><td>---</td><td>full-width half maximum of any blurring (same units as vscale)</td></tr>
+<tr valign="top"><td><i>nfine</i></td><td>---</td><td>fine sub-division factor for blurring. Each contribution is added into the nearest pixel
+in a fine array and then blurred.</td></tr>
+<tr valign="top"><td><i>align</i></td><td>---</td><td>true to shift out the motion of the centre of mass of the secondary star. This allows the
+profiles to be compared more easily although not necessarily directly with data.</td></tr>
+</table>
+<p>
+
+
+<h2>Classes</h2>
+
+<p>
+This command is a member of the class: <a href="Model.html">Model</a>.
+
+<p>
+Author: T.R.Marsh<br>
+Created: 21 Sep 2003<br>
+Revised: 29 May 2011<br>
+
+<p>
+<hr>
+<address>Page generated Sat Oct  1 00:27:25 2022</address>
+</body>
+</html>
