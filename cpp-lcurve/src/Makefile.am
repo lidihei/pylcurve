@@ -8,6 +8,14 @@ progdir = @bindir@/@PACKAGE@
 
 prog_PROGRAMS   = lprofile visualise picture simplex lroche levmarq rotprof lroches
 
+lib_LTLIBRARIES = libpylcurve.la
+
+
+libpylcurve_la_SOURCES = libpylcurve.cc numface.cc set_star_grid.cc set_star_continuum.cc comp_light.cc trm_lcurve.cc pylight_curve_comp.cc re_scale.cc \
+set_disc_grid.cc set_disc_continuum.cc set_bright_spot_grid.cc star_eclipse.cc comp_gravity.cc comp_radius.cc light_curve_comp.cc
+libpylcurve_la_CPPFLAGS = -fopenmp -I../include
+libpylcurve_la_LDFLAGS  = -fopenmp -shared -fPIC
+
 lprofile_SOURCES = lprofile.cc numface.cc set_star_grid.cc set_star_emission.cc light_curve_comp.cc comp_light.cc trm_lcurve.cc \
 set_star_continuum.cc re_scale.cc set_disc_grid.cc set_bright_spot_grid.cc set_disc_continuum.cc star_eclipse.cc comp_gravity.cc \
 comp_radius.cc

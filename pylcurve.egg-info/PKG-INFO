@@ -1,0 +1,27 @@
+Metadata-Version: 1.1
+Name: pylcurve
+Version: 0.0.0
+Summary: python wrapper of lcurve
+Home-page: https://github.com/lidihei/pylcurve
+Author: Jiao Li
+Author-email: lijiao@bao.ac.cn
+License: UNKNOWN
+Description: # pylcurve
+        This a python wrapper for lcurve written by Thomas Marsh
+        
+        
+        'lcurve' is for modelling of light curves.
+        
+        Installation order: subs --> colly, binary --> roche --> lcurve  (https://github.com/trmrsh/cpp-lcurve)
+        
+        The file called 'Lcurve' that is generated in this directory defines
+        aliases (csh-style) and prints a help message when sourced.
+        
+        https://cygnus.astro.warwick.ac.uk/phsaap/software
+        
+Platform: UNKNOWN
+Classifier: Development Status :: beta
+Classifier: Intended Audience :: Education
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Topic :: Scientific/Engineering :: Physics
+Classifier: Topic :: Scientific/Engineering :: Astronomy

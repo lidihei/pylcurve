@@ -893,6 +893,14 @@ namespace Lcurve {
                         double& chisq, double& wnok,
                         double& logg1, double& logg2, double& rv1, double& rv2);
 
+  //! Computes an entire light curve corresponding to a given time for python added by lijiao.
+  void pylight_curve_comp(const Lcurve::Model& mdl,
+                              double *time, double *expose, int *ndiv, int Tsize,
+                              bool info,
+                              double *calc, double *lcstar1, double *lcdisc,
+                              double *lcedge, double *lcspot, double *lcstar2,
+                              double& wdwarf,
+                              double& logg1, double& logg2, double& rv1, double& rv2);
 
   //! Re-scales a fit to minimise chi**2
   double re_scale(const Lcurve::Data& data, Subs::Array1D<double>& fit,
