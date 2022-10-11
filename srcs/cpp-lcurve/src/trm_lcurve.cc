@@ -288,7 +288,7 @@ Lcurve::Model::Model(const std::string& file) {
        names["stsp21_fwhm"] || names["stsp21_tcen"]){
         if(!(names["stsp21_long"] && names["stsp21_lat"] &&
              names["stsp21_fwhm"] && names["stsp21_tcen"]))
-            throw Lcurve_Error("One or more of the star spot 11 parameters were not initialised");
+            throw Lcurve_Error("One or more of the star spot 21 parameters were not initialised");
         stsp21_long = Pparam(pv["stsp21_long"]);
         stsp21_lat  = Pparam(pv["stsp21_lat"]);
         stsp21_fwhm = Pparam(pv["stsp21_fwhm"]);
@@ -443,72 +443,81 @@ Lcurve::Model::Model(//Binary and stars
     // Initialise physical parameters
     q                = Pparam(q_value, q_range, q_dstep, q_vary, q_defined);
     // std::cout << "lijiao trm_lroche.cc:  q2): " << q.value << std::endl; 
-    iangle                = Pparam(iangle_value, iangle_range, iangle_dstep, iangle_vary, iangle_defined);
-    r1                = Pparam(r1_value, r1_range, r1_dstep, r1_vary, r1_defined);
-    r2                = Pparam(r2_value, r2_range, r2_dstep, r2_vary, r2_defined);
-    cphi3                = Pparam(cphi3_value, cphi3_range, cphi3_dstep, cphi3_vary, cphi3_defined);
-    cphi4                = Pparam(cphi4_value, cphi4_range, cphi4_dstep, cphi4_vary, cphi4_defined);
-    spin1                = Pparam(spin1_value, spin1_range, spin1_dstep, spin1_vary, spin1_defined);
-    spin2                = Pparam(spin2_value, spin2_range, spin2_dstep, spin2_vary, spin2_defined);
-    t1                = Pparam(t1_value, t1_range, t1_dstep, t1_vary, t1_defined);
-    t2                = Pparam(t2_value, t2_range, t2_dstep, t2_vary, t2_defined);
-    ldc1_1                = Pparam(ldc1_1_value, ldc1_1_range, ldc1_1_dstep, ldc1_1_vary, ldc1_1_defined);
-    ldc1_2                = Pparam(ldc1_2_value, ldc1_2_range, ldc1_2_dstep, ldc1_2_vary, ldc1_2_defined);
-    ldc1_3                = Pparam(ldc1_3_value, ldc1_3_range, ldc1_3_dstep, ldc1_3_vary, ldc1_3_defined);
-    ldc1_4                = Pparam(ldc1_4_value, ldc1_4_range, ldc1_4_dstep, ldc1_4_vary, ldc1_4_defined);
-    ldc2_1                = Pparam(ldc2_1_value, ldc2_1_range, ldc2_1_dstep, ldc2_1_vary, ldc2_1_defined);
-    ldc2_2                = Pparam(ldc2_2_value, ldc2_2_range, ldc2_2_dstep, ldc2_2_vary, ldc2_2_defined);
-    ldc2_3                = Pparam(ldc2_3_value, ldc2_3_range, ldc2_3_dstep, ldc2_3_vary, ldc2_3_defined);
-    ldc2_4                = Pparam(ldc2_4_value, ldc2_4_range, ldc2_4_dstep, ldc2_4_vary, ldc2_4_defined);
-    velocity_scale                = Pparam(velocity_scale_value, velocity_scale_range, velocity_scale_dstep, velocity_scale_vary, velocity_scale_defined);
-    beam_factor1                = Pparam(beam_factor1_value, beam_factor1_range, beam_factor1_dstep, beam_factor1_vary, beam_factor1_defined);
-    beam_factor2                = Pparam(beam_factor2_value, beam_factor2_range, beam_factor2_dstep, beam_factor2_vary, beam_factor2_defined);
-    t0                = Pparam(t0_value, t0_range, t0_dstep, t0_vary, t0_defined);
-    period                = Pparam(period_value, period_range, period_dstep, period_vary, period_defined);
-    pdot                = Pparam(pdot_value, pdot_range, pdot_dstep, pdot_vary, pdot_defined);
-    deltat                = Pparam(deltat_value, deltat_range, deltat_dstep, deltat_vary, deltat_defined);
-    gravity_dark1                = Pparam(gravity_dark1_value, gravity_dark1_range, gravity_dark1_dstep, gravity_dark1_vary, gravity_dark1_defined);
-    gravity_dark2                = Pparam(gravity_dark2_value, gravity_dark2_range, gravity_dark2_dstep, gravity_dark2_vary, gravity_dark2_defined);
-    absorb                = Pparam(absorb_value, absorb_range, absorb_dstep, absorb_vary, absorb_defined);
-    slope                = Pparam(slope_value, slope_range, slope_dstep, slope_vary, slope_defined);
-    quad                = Pparam(quad_value, quad_range, quad_dstep, quad_vary, quad_defined);
-    cube                = Pparam(cube_value, cube_range, cube_dstep, cube_vary, cube_defined);
-    third                = Pparam(third_value, third_range, third_dstep, third_vary, third_defined);
-    rdisc1                = Pparam(rdisc1_value, rdisc1_range, rdisc1_dstep, rdisc1_vary, rdisc1_defined);
-    rdisc2                = Pparam(rdisc2_value, rdisc2_range, rdisc2_dstep, rdisc2_vary, rdisc2_defined);
-    height_disc                = Pparam(height_disc_value, height_disc_range, height_disc_dstep, height_disc_vary, height_disc_defined);
-    beta_disc                = Pparam(beta_disc_value, beta_disc_range, beta_disc_dstep, beta_disc_vary, beta_disc_defined);
-    temp_disc                = Pparam(temp_disc_value, temp_disc_range, temp_disc_dstep, temp_disc_vary, temp_disc_defined);
-    texp_disc                = Pparam(texp_disc_value, texp_disc_range, texp_disc_dstep, texp_disc_vary, texp_disc_defined);
-    lin_limb_disc                = Pparam(lin_limb_disc_value, lin_limb_disc_range, lin_limb_disc_dstep, lin_limb_disc_vary, lin_limb_disc_defined);
-    quad_limb_disc                = Pparam(quad_limb_disc_value, quad_limb_disc_range, quad_limb_disc_dstep, quad_limb_disc_vary, quad_limb_disc_defined);
-    temp_edge                = Pparam(temp_edge_value, temp_edge_range, temp_edge_dstep, temp_edge_vary, temp_edge_defined);
-    absorb_edge                = Pparam(absorb_edge_value, absorb_edge_range, absorb_edge_dstep, absorb_edge_vary, absorb_edge_defined);
-    radius_spot                = Pparam(radius_spot_value, radius_spot_range, radius_spot_dstep, radius_spot_vary, radius_spot_defined);
-    length_spot                = Pparam(length_spot_value, length_spot_range, length_spot_dstep, length_spot_vary, length_spot_defined);
-    height_spot                = Pparam(height_spot_value, height_spot_range, height_spot_dstep, height_spot_vary, height_spot_defined);
-    expon_spot                = Pparam(expon_spot_value, expon_spot_range, expon_spot_dstep, expon_spot_vary, expon_spot_defined);
-    epow_spot                = Pparam(epow_spot_value, epow_spot_range, epow_spot_dstep, epow_spot_vary, epow_spot_defined);
-    angle_spot                = Pparam(angle_spot_value, angle_spot_range, angle_spot_dstep, angle_spot_vary, angle_spot_defined);
-    yaw_spot                = Pparam(yaw_spot_value, yaw_spot_range, yaw_spot_dstep, yaw_spot_vary, yaw_spot_defined);
-    temp_spot                = Pparam(temp_spot_value, temp_spot_range, temp_spot_dstep, temp_spot_vary, temp_spot_defined);
-    tilt_spot                = Pparam(tilt_spot_value, tilt_spot_range, tilt_spot_dstep, tilt_spot_vary, tilt_spot_defined);
-    cfrac_spot                = Pparam(cfrac_spot_value, cfrac_spot_range, cfrac_spot_dstep, cfrac_spot_vary, cfrac_spot_defined);
-
+    iangle           = Pparam(iangle_value, iangle_range, iangle_dstep, iangle_vary, iangle_defined);
+    r1               = Pparam(r1_value, r1_range, r1_dstep, r1_vary, r1_defined);
+    r2               = Pparam(r2_value, r2_range, r2_dstep, r2_vary, r2_defined);
+    cphi3            = Pparam(cphi3_value, cphi3_range, cphi3_dstep, cphi3_vary, cphi3_defined);
+    cphi4            = Pparam(cphi4_value, cphi4_range, cphi4_dstep, cphi4_vary, cphi4_defined);
+    spin1            = Pparam(spin1_value, spin1_range, spin1_dstep, spin1_vary, spin1_defined);
+    spin2            = Pparam(spin2_value, spin2_range, spin2_dstep, spin2_vary, spin2_defined);
+    t1               = Pparam(t1_value, t1_range, t1_dstep, t1_vary, t1_defined);
+    t2               = Pparam(t2_value, t2_range, t2_dstep, t2_vary, t2_defined);
+    ldc1_1           = Pparam(ldc1_1_value, ldc1_1_range, ldc1_1_dstep, ldc1_1_vary, ldc1_1_defined);
+    ldc1_2           = Pparam(ldc1_2_value, ldc1_2_range, ldc1_2_dstep, ldc1_2_vary, ldc1_2_defined);
+    ldc1_3           = Pparam(ldc1_3_value, ldc1_3_range, ldc1_3_dstep, ldc1_3_vary, ldc1_3_defined);
+    ldc1_4           = Pparam(ldc1_4_value, ldc1_4_range, ldc1_4_dstep, ldc1_4_vary, ldc1_4_defined);
+    ldc2_1           = Pparam(ldc2_1_value, ldc2_1_range, ldc2_1_dstep, ldc2_1_vary, ldc2_1_defined);
+    ldc2_2           = Pparam(ldc2_2_value, ldc2_2_range, ldc2_2_dstep, ldc2_2_vary, ldc2_2_defined);
+    ldc2_3           = Pparam(ldc2_3_value, ldc2_3_range, ldc2_3_dstep, ldc2_3_vary, ldc2_3_defined);
+    ldc2_4           = Pparam(ldc2_4_value, ldc2_4_range, ldc2_4_dstep, ldc2_4_vary, ldc2_4_defined);
+    velocity_scale   = Pparam(velocity_scale_value, velocity_scale_range, velocity_scale_dstep, velocity_scale_vary, velocity_scale_defined);
+    beam_factor1     = Pparam(beam_factor1_value, beam_factor1_range, beam_factor1_dstep, beam_factor1_vary, beam_factor1_defined);
+    beam_factor2     = Pparam(beam_factor2_value, beam_factor2_range, beam_factor2_dstep, beam_factor2_vary, beam_factor2_defined);
+    t0               = Pparam(t0_value, t0_range, t0_dstep, t0_vary, t0_defined);
+    period           = Pparam(period_value, period_range, period_dstep, period_vary, period_defined);
+    pdot             = Pparam(pdot_value, pdot_range, pdot_dstep, pdot_vary, pdot_defined);
+    deltat           = Pparam(deltat_value, deltat_range, deltat_dstep, deltat_vary, deltat_defined);
+    gravity_dark1    = Pparam(gravity_dark1_value, gravity_dark1_range, gravity_dark1_dstep, gravity_dark1_vary, gravity_dark1_defined);
+    gravity_dark2    = Pparam(gravity_dark2_value, gravity_dark2_range, gravity_dark2_dstep, gravity_dark2_vary, gravity_dark2_defined);
+    absorb           = Pparam(absorb_value, absorb_range, absorb_dstep, absorb_vary, absorb_defined);
+    slope            = Pparam(slope_value, slope_range, slope_dstep, slope_vary, slope_defined);
+    quad             = Pparam(quad_value, quad_range, quad_dstep, quad_vary, quad_defined);
+    cube             = Pparam(cube_value, cube_range, cube_dstep, cube_vary, cube_defined);
+    third            = Pparam(third_value, third_range, third_dstep, third_vary, third_defined);
+    rdisc1           = Pparam(rdisc1_value, rdisc1_range, rdisc1_dstep, rdisc1_vary, rdisc1_defined);
+    rdisc2           = Pparam(rdisc2_value, rdisc2_range, rdisc2_dstep, rdisc2_vary, rdisc2_defined);
+    height_disc      = Pparam(height_disc_value, height_disc_range, height_disc_dstep, height_disc_vary, height_disc_defined);
+    beta_disc        = Pparam(beta_disc_value, beta_disc_range, beta_disc_dstep, beta_disc_vary, beta_disc_defined);
+    temp_disc        = Pparam(temp_disc_value, temp_disc_range, temp_disc_dstep, temp_disc_vary, temp_disc_defined);
+    texp_disc        = Pparam(texp_disc_value, texp_disc_range, texp_disc_dstep, texp_disc_vary, texp_disc_defined);
+    lin_limb_disc    = Pparam(lin_limb_disc_value, lin_limb_disc_range, lin_limb_disc_dstep, lin_limb_disc_vary, lin_limb_disc_defined);
+    quad_limb_disc   = Pparam(quad_limb_disc_value, quad_limb_disc_range, quad_limb_disc_dstep, quad_limb_disc_vary, quad_limb_disc_defined);
+    temp_edge        = Pparam(temp_edge_value, temp_edge_range, temp_edge_dstep, temp_edge_vary, temp_edge_defined);
+    absorb_edge      = Pparam(absorb_edge_value, absorb_edge_range, absorb_edge_dstep, absorb_edge_vary, absorb_edge_defined);
+    radius_spot      = Pparam(radius_spot_value, radius_spot_range, radius_spot_dstep, radius_spot_vary, radius_spot_defined);
+    length_spot      = Pparam(length_spot_value, length_spot_range, length_spot_dstep, length_spot_vary, length_spot_defined);
+    height_spot      = Pparam(height_spot_value, height_spot_range, height_spot_dstep, height_spot_vary, height_spot_defined);
+    expon_spot       = Pparam(expon_spot_value, expon_spot_range, expon_spot_dstep, expon_spot_vary, expon_spot_defined);
+    epow_spot        = Pparam(epow_spot_value, epow_spot_range, epow_spot_dstep, epow_spot_vary, epow_spot_defined);
+    angle_spot       = Pparam(angle_spot_value, angle_spot_range, angle_spot_dstep, angle_spot_vary, angle_spot_defined);
+    yaw_spot         = Pparam(yaw_spot_value, yaw_spot_range, yaw_spot_dstep, yaw_spot_vary, yaw_spot_defined);
+    temp_spot        = Pparam(temp_spot_value, temp_spot_range, temp_spot_dstep, temp_spot_vary, temp_spot_defined);
+    tilt_spot        = Pparam(tilt_spot_value, tilt_spot_range, tilt_spot_dstep, tilt_spot_vary, tilt_spot_defined);
+    cfrac_spot       = Pparam(cfrac_spot_value, cfrac_spot_range, cfrac_spot_dstep, cfrac_spot_vary, cfrac_spot_defined);
 
     // star-spot parameters need not have been defined, but
     // if one of a group has, then all of them should be
-    stsp11_long                = Pparam(stsp11_long_value, stsp11_long_range, stsp11_long_dstep, stsp11_long_vary, stsp11_long_defined);
-    stsp11_lat                = Pparam(stsp11_lat_value, stsp11_lat_range, stsp11_lat_dstep, stsp11_lat_vary, stsp11_lat_defined);
-    stsp11_fwhm                = Pparam(stsp11_fwhm_value, stsp11_fwhm_range, stsp11_fwhm_dstep, stsp11_fwhm_vary, stsp11_fwhm_defined);
-    stsp11_tcen                = Pparam(stsp11_tcen_value, stsp11_tcen_range, stsp11_tcen_dstep, stsp11_tcen_vary, stsp11_tcen_defined);
+    if(stsp11_long_defined || stsp11_lat_defined ||
+        stsp11_fwhm_defined || stsp11_tcen_defined){
+        if(!(stsp11_long_defined && stsp11_lat_defined &&
+             stsp11_fwhm_defined && stsp11_tcen_defined))
+            throw Lcurve_Error("One or more of the star spot 11 parameters were not initialised");
+        stsp11_long      = Pparam(stsp11_long_value, stsp11_long_range, stsp11_long_dstep, stsp11_long_vary, stsp11_long_defined);
+        stsp11_lat       = Pparam(stsp11_lat_value, stsp11_lat_range, stsp11_lat_dstep, stsp11_lat_vary, stsp11_lat_defined);
+        stsp11_fwhm      = Pparam(stsp11_fwhm_value, stsp11_fwhm_range, stsp11_fwhm_dstep, stsp11_fwhm_vary, stsp11_fwhm_defined);
+        stsp11_tcen      = Pparam(stsp11_tcen_value, stsp11_tcen_range, stsp11_tcen_dstep, stsp11_tcen_vary, stsp11_tcen_defined);
+       }
 
-
-    stsp21_long                = Pparam(stsp21_long_value, stsp21_long_range, stsp21_long_dstep, stsp21_long_vary, stsp21_long_defined);
-    stsp21_lat                = Pparam(stsp21_lat_value, stsp21_lat_range, stsp21_lat_dstep, stsp21_lat_vary, stsp21_lat_defined);
-    stsp21_fwhm                = Pparam(stsp21_fwhm_value, stsp21_fwhm_range, stsp21_fwhm_dstep, stsp21_fwhm_vary, stsp21_fwhm_defined);
-    stsp21_tcen                = Pparam(stsp21_tcen_value, stsp21_tcen_range, stsp21_tcen_dstep, stsp21_tcen_vary, stsp21_tcen_defined);
-
+    if(stsp21_long_defined || stsp21_lat_defined ||
+        stsp21_fwhm_defined || stsp21_tcen_defined){
+        if(!(stsp21_long_defined && stsp21_lat_defined &&
+             stsp21_fwhm_defined && stsp21_tcen_defined))
+            throw Lcurve_Error("One or more of the star spot 21 parameters were not initialised");
+        stsp21_long      = Pparam(stsp21_long_value, stsp21_long_range, stsp21_long_dstep, stsp21_long_vary, stsp21_long_defined);
+        stsp21_lat       = Pparam(stsp21_lat_value, stsp21_lat_range, stsp21_lat_dstep, stsp21_lat_vary, stsp21_lat_defined);
+        stsp21_fwhm      = Pparam(stsp21_fwhm_value, stsp21_fwhm_range, stsp21_fwhm_dstep, stsp21_fwhm_vary, stsp21_fwhm_defined);
+        stsp21_tcen      = Pparam(stsp21_tcen_value, stsp21_tcen_range, stsp21_tcen_dstep, stsp21_tcen_vary, stsp21_tcen_defined);
+         }
     // if(names["uesp_long1"] || names["uesp_long2"] ||
     //    names["uesp_lathw"] || names["uesp_taper"] || names["uesp_temp"]){
     //   if(!(names["uesp_long1"] && names["uesp_long2"] &&

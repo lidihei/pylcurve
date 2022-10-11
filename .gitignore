@@ -38,7 +38,6 @@ example/log
 *.o
 *.Po
 *scripts/0651/*
-*m4/*
 !*.cc
 *.m4
 *doc/*.html

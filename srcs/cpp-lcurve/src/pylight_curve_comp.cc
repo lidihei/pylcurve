@@ -54,7 +54,8 @@ void Lcurve::pylight_curve_comp(const Lcurve::Model& mdl,
       double a = std::pow(gm/Subs::sqr(Constants::TWOPI/Constants::DAY/mdl.tperiod),1./3.);
       rlens1 = 4.*gm/(1.+mdl.q)/a/Subs::sqr(Constants::C);
   }
-
+   std::cout<<"lijiao pylight_curve_comp rlens1 =  " <<  rlens1<<std::endl;
+   std::cout<<"lijiao pylight_curve_comp llo =  " <<  mdl.llo<<std::endl;
   // Generate arrays over each star's face. Fine grids first:
   Subs::Buffer1D<Point> star1f, star2f, disc, edge, spot;
   std::cout<<"lijiao test 0-1 "<<std::endl;

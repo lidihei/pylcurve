@@ -163,15 +163,12 @@ namespace Lcurve {
     Pparam(const std::string& entry){
       std::istringstream istr(entry);
       istr >> value >> range >> dstep >> vary;
-      // std::cout << "lijiao lcurve.h Pparam entry: " << entry << std::endl;
+      //std::cout << "lijiao lcurve.h Pparam entry: " << entry << std::endl;
       // std::cout << "lijiao lcurve.h value: " << value << std::endl;
       if(!istr)
         throw Lcurve::Lcurve_Error(std::string("Pparam: could not read entry = ") + entry);
       istr >> defined;
-      if(!istr){defined = true;
-                std::cout<<"lijiao defined = True"<<std::endl;
-               }
-      else{std::cout<<"lijiao defined != True"<<std::endl;}
+      if(!istr) defined = true;
     }
 
     //! Constructor from arguments added by lijiao

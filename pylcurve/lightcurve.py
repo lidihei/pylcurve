@@ -8,6 +8,13 @@ libdir = os.path.join(os.path.dirname(libdir), 'lib')
 
 class lcurve:
 
+    def __init__(self, libdir=libdir, lib='libpylcurve.so'):
+        '''
+        load libpylcurve
+        '''
+        libpylcurve=CDLL(f"{libdir}/{lib}")
+        self.libpylcurve = libpylcurve
+
     def lc(self, times, expose=0, ndiv=1,
        ###Binary and stars
        q_value = 0.9670,  q_range = 0.,  q_dstep = 0.,  q_vary = False,  q_defined = False,
@@ -182,8 +189,8 @@ class lcurve:
         gdark_bolom [float] --- True if the gravity darkening coefficient represents the bolometric value where T is proportional to gravity to the power set by the coefficient. This is translated to flux variations using the black-body approximation. If False, it represents a filter-integrated value 'y' coefficient such that the flux depends upon the gravity to the power 'y'. This is itself an approximation and ideally should replaced by a proper function of gravity, but is probably good enough for most purposes. Please see gravity_dark.
         mucrit1 [float] --- Critical value of mu on star 1 below which intensity is assumed to be zero. This is to allow one to represent Claret and Hauschildt's (2004) results where I(mu) drops steeply for mu < 0.08 or so. WARNING: this option is dangerous. I would normally advise setting it = 0 unless you really know what you are doing as it leads to discontinuities.
         mucrit2 [float] --- Critical value of mu on star 2 below which intensity is assumed to be zero. See comments on mucrit1 for more.
-        limb1 [stri] --- String, either 'Poly' or 'Claret' determining the type of limb darkening law. See comments on ldc1_1 above.
-        limb2 [stri] --- String, either 'Poly' or 'Claret' determining the type of limb darkening law. See comments on ldc1_1 above.
+        slimb1 [stri] --- String, either 'Poly' or 'Claret' determining the type of limb darkening law. See comments on ldc1_1 above.
+        slimb2 [stri] --- String, either 'Poly' or 'Claret' determining the type of limb darkening law. See comments on ldc1_1 above.
         mirror [bool] --- Add any light not reprocessed in as if star reflected it or not as a crude approximation to the effet of gray scattering
         add_disc [bool] --- Add a disc or not
         opaque [bool] --- Make disc opaque or not
@@ -282,8 +289,7 @@ class lcurve:
         slimb1 = create_string_buffer(slimb1.encode(), size=len(slimb1))
         slimb2 = create_string_buffer(slimb2.encode(), size=len(slimb2))
 
-        ####----------------------- load libpylcurve------------------------------------------------------
-        libpylcurve=CDLL(f"{libdir}/libpylcurve.so")
+        libpylcurve=self.libpylcurve
         libpylcurve.pylcurve(
                   times, expose, ndiv, Tsize,
                   calc, lcstar1, lcdisc,
@@ -363,3 +369,47 @@ class lcurve:
         self.libpylcurve  = libpylcurve
         print('ok')
 
+    def lc_from_smodel(self, smodel, times, expose=0, ndiv=1, info=True):
+        '''
+        parameters:
+        -----------------------------------------------------------------------
+        smodel [str] --- the name of modle file
+        times [float array 1D] --- it must be 1D np.array
+        wdwarf [float] --- White dwarf's contribution
+        logg1 [float] --- flux-weighted logg of star1
+        logg2 [float] --- flux-weighted logg of star2
+        rv1: [float] --- volume-averaged radius of star1
+        rv2: [float] --- volume-averaged radius of star2
+        expose [float array 1D] --- The exposure length in the same units as the time
+        ndiv [int or int array 1D] --- Factor to split up data points to allow for finite exposures
+        info [bool] --- if true, it prints out array sizes to stderr
+        '''
+        Tsize = len(times)
+        ####--------------inintalize time and light curves arrays-----------------------------------------
+        if isinstance(expose, float): expose = expose*np.ones(Tsize, dtype=np.double)
+        if isinstance(ndiv, float): ndiv = ndiv*np.ones(Tsize, dtype=np.int)
+        calc, lcstar1, lcdisc, lcedge, lcspot, lcstar2 = np.empty((6, Tsize), dtype=np.float)
+        ####----------------------- declare variables------------------------------------------------------
+        smodel = create_string_buffer(smodel.encode(), size=len(smodel))
+        times = times.ctypes.data_as(POINTER(c_double*Tsize))
+        expose = expose.ctypes.data_as(POINTER(c_double*Tsize))
+        ndiv = ndiv.ctypes.data_as(POINTER(c_int*Tsize))
+        calc = calc.ctypes.data_as(POINTER(c_double*Tsize))
+        lcstar1 = lcstar1.ctypes.data_as(POINTER(c_double*Tsize))
+        lcdisc = lcdisc.ctypes.data_as(POINTER(c_double*Tsize))
+        lcedge = lcedge.ctypes.data_as(POINTER(c_double*Tsize))
+        lcspot = lcspot.ctypes.data_as(POINTER(c_double*Tsize))
+        lcstar2 = lcstar2.ctypes.data_as(POINTER(c_double*Tsize))
+        #wdwarf = c_double(wdwarf)
+        #logg1 = c_double(logg1)
+        #logg2 = c_double(logg2)
+        #rv1 = c_double(rv1)
+        #rv2 = c_double(rv2)
+        info = c_bool(info)
+        libpylcurve=self.libpylcurve
+        libpylcurve.pylcurve_smodel(smodel, 
+                      times, expose, ndiv, Tsize,
+                      info,
+                      calc, lcstar1, lcdisc,
+                      lcedge, lcspot, lcstar2)
+        print('ok')

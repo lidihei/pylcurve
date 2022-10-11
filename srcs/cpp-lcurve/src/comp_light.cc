@@ -52,6 +52,7 @@ double Lcurve::comp_light(double iangle, const LDC& ldc1, const LDC& ldc2,
                           const Subs::Buffer1D<Lcurve::Point>& spot){
 
     std::cout << "lijiao test comp_light.cc: comp_light iangle: " << iangle <<"; phase: " << phase << std::endl;
+    std::cout << "lijiao test comp_light.cc: comp_light iangle---1: " << iangle <<"; phase: " << phase << std::endl;
     const double XCOFM = q/(1.+q);
     const double cosi  = cos(Constants::TWOPI*iangle/360.);
     const double sini  = sin(Constants::TWOPI*iangle/360.);

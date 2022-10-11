@@ -510,4 +510,46 @@ extern "C"{
             exit(EXIT_FAILURE);
         }
     }//void pylcurve(
+
+
+   void pylcurve_smodel(const char *smodel, 
+                      double *time, double *expose, int *ndiv, int Tsize,
+                      bool info,
+                      double *calc, double *lcstar1, double *lcdisc,
+                      double *lcedge, double *lcspot, double *lcstar2){
+        try{
+            Lcurve::Model model(smodel);
+            // Compute light curve
+            double wdwarf, chisq, wnok, logg1, logg2, rv1, rv2;
+            Lcurve::pylight_curve_comp(model, time, expose, ndiv, Tsize, info, calc,
+                                       lcstar1, lcdisc, lcedge, lcspot, lcstar2,
+                                       wdwarf, logg1, logg2, rv1, rv2);
+    
+            std::cout << "White dwarf's contribution = " << wdwarf
+                      << std::endl;
+            std::cout << "log10(g1 [cgs]) = " << logg1 << std::endl;
+            std::cout << "log10(g2 [cgs]) = " << logg2 << std::endl;
+            std::cout << "Vol-averaged r1 = " << rv1 << std::endl;
+            std::cout << "Vol-averaged r2 = " << rv2 << std::endl;
+    
+        } //try
+        catch(const Roche::Roche_Error& err){
+            std::cerr << "Roche::Roche_Error exception thrown" << std::endl;
+            std::cerr << "libpylcurve: " << err.what() << std::endl;
+            exit(EXIT_FAILURE);
+        }
+        catch(const Lcurve::Lcurve_Error& err){
+            std::cerr << "Lcurve::Lcurve_Error exception thrown" << std::endl;
+            std::cerr << err << std::endl;
+            exit(EXIT_FAILURE);
+        }
+        catch(const std::string& err){
+            std::cerr << err << std::endl;
+            exit(EXIT_FAILURE);
+        }
+        catch(...){
+            std::cerr << "Unknown exception caught in lroche" << std::endl;
+            exit(EXIT_FAILURE);
+        }
+   }//pylcurve_file
 } //extern "C"
