@@ -23,6 +23,7 @@ f.close()
 class _install(install):
     def run(self):
         print('#-------------------------start make libpylcurve lib--------------')
+        subprocess.call(['autoreconf', '-f', '-i', '-s'])
         subprocess.call(['make', 'clean', '-C', './'])
         subprocess.call(['make', '-C', './'])
         install.run(self)
@@ -31,7 +32,10 @@ class _install(install):
 
 
 #subprocess.call(['cp', './cpp-lcurve/src/.libs/*.so' './'])
-os.system('cp ./cpp-lcurve/src/.libs/*.so pylcurve/lib/')
+subprocess.call(['make', 'clean', '-C', './srcs/cpp-lcurve/src'])
+subprocess.call(['make',  '-C', './srcs/cpp-lcurve/src'])
+os.system('cp ./srcs/cpp-lcurve/src/.libs/*.so pylcurve/lib/')
+subprocess.call(['make', 'clean', '-C', './srcs/cpp-lcurve/src'])
 
 VERSION = '0.0.0' 
 DESCRIPTION = 'python wrapper of lcurve'
