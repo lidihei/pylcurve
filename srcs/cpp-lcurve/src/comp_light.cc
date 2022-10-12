@@ -51,8 +51,7 @@ double Lcurve::comp_light(double iangle, const LDC& ldc1, const LDC& ldc2,
 			  const Subs::Buffer1D<Lcurve::Point>& edge,
                           const Subs::Buffer1D<Lcurve::Point>& spot){
 
-    std::cout << "lijiao test comp_light.cc: comp_light iangle: " << iangle <<"; phase: " << phase << std::endl;
-    std::cout << "lijiao test comp_light.cc: comp_light iangle---1: " << iangle <<"; phase: " << phase << std::endl;
+    // std::cout << "lijiao test comp_light.cc: comp_light iangle: " << iangle <<"; phase: " << phase << std::endl;
     const double XCOFM = q/(1.+q);
     const double cosi  = cos(Constants::TWOPI*iangle/360.);
     const double sini  = sin(Constants::TWOPI*iangle/360.);
@@ -220,7 +219,7 @@ double Lcurve::comp_star1(double iangle, const LDC& ldc1, double phase, double e
                           const Subs::Buffer1D<Lcurve::Point>& star1f, 
 			  const Subs::Buffer1D<Lcurve::Point>& star1c){
 
-    std::cout << "lijiao test comp_light.cc: comp_star1 iangle: " << iangle << std::endl;
+    // std::cout << "lijiao test comp_light.cc: comp_star1 iangle: " << iangle << std::endl;
     const double XCOFM = q/(1.+q);
     double ri = Subs::deg2rad(iangle);
     const double cosi  = cos(ri);
@@ -306,7 +305,7 @@ double Lcurve::comp_star2(double iangle, const LDC& ldc2, double phase, double e
 			  const Subs::Buffer1D<Lcurve::Point>& star2f,
                           const Subs::Buffer1D<Lcurve::Point>& star2c){
 
-    std::cout << "lijiao test comp_light.cc: comp_star2 iangle: " << iangle << std::endl;
+    // std::cout << "lijiao test comp_light.cc: comp_star2 iangle: " << iangle << std::endl;
     const double XCOFM = q/(1.+q);
     double ri = Subs::deg2rad(iangle);
     const double cosi  = cos(ri);
@@ -413,7 +412,7 @@ double Lcurve::comp_disc(double iangle, double lin_limb_disc, double quad_limb_d
 			 double phase, double expose, int ndiv, double q, float vscale,
 			 const Subs::Buffer1D<Lcurve::Point>& disc){
 
-    std::cout << "lijiao test comp_light.cc: comp_disk iangle: " << iangle << std::endl;
+    // std::cout << "lijiao test comp_light.cc: comp_disk iangle: " << iangle << std::endl;
     const Subs::Vec3 COFM(q/(1.+q),0.,0.), SPIN(0.,0.,1.);
     double ri = Subs::deg2rad(iangle);
     const double cosi  = cos(ri);
@@ -470,7 +469,7 @@ double Lcurve::comp_edge(double iangle, double lin_limb_disc, double quad_limb_d
 			 double phase, double expose, int ndiv, double q, float vscale,
 			 const Subs::Buffer1D<Lcurve::Point>& edge){
 
-    std::cout << "lijiao test comp_light.cc: comp_edge iangle: " << iangle << std::endl;
+    // std::cout << "lijiao test comp_light.cc: comp_edge iangle: " << iangle << std::endl;
     const Subs::Vec3 COFM(q/(1.+q),0.,0.), SPIN(0.,0.,1.);
     double ri = Subs::deg2rad(iangle);
     const double cosi = cos(ri);
@@ -524,7 +523,7 @@ double Lcurve::comp_edge(double iangle, double lin_limb_disc, double quad_limb_d
 double Lcurve::comp_spot(double iangle,double phase, double expose, int ndiv, double q,
 			 float vscale, const Subs::Buffer1D<Lcurve::Point>& spot){
 
-    std::cout << "lijiao test comp_light.cc: comp_spot iangle: " << iangle << std::endl;
+    // std::cout << "lijiao test comp_light.cc: comp_spot iangle: " << iangle << std::endl;
     const Subs::Vec3 COFM(q/(1.+q),0.,0.), SPIN(0.,0.,1.);
     double ri = Subs::deg2rad(iangle);
     const double cosi  = cos(ri);

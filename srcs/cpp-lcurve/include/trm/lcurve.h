@@ -334,7 +334,7 @@ namespace Lcurve {
            int nlatfill, int nlngfill, double lfudge, double llo, double lhi, double phase1, double phase2, int nrad, double wavelength,
            bool roche1, bool roche2, bool eclipse1, bool eclipse2, bool glens1, bool use_radii,
            double tperiod, double gdark_bolom1, double gdark_bolom2, double mucrit1, double mucrit2, 
-           const char *slimb1, const char *slimb2, bool mirror, bool add_disc, bool opaque, bool add_spot, int nspot, bool iscale
+           const char* pslimb1, const char* pslimb2, bool mirror, bool add_disc, bool opaque, bool add_spot, int nspot, bool iscale
                     );
 
 

@@ -31,13 +31,13 @@ class _install(install):
 
 
 
-##subprocess.call(['cp', './cpp-lcurve/src/.libs/*.so' './'])
-##subprocess.call(['make', 'clean', '-C', './srcs/cpp-lcurve'])
-##os.system('./srcs/cpp-lcurve/bootstrap')
-#subprocess.call(['make', 'clean', '-C', './srcs/cpp-lcurve/src'])
-#subprocess.call(['make',  '-C', './srcs/cpp-lcurve/src'])
-#os.system('cp ./srcs/cpp-lcurve/src/.libs/*.so pylcurve/lib/')
+#subprocess.call(['cp', './cpp-lcurve/src/.libs/*.so' './'])
 #subprocess.call(['make', 'clean', '-C', './srcs/cpp-lcurve'])
+#os.system('./srcs/cpp-lcurve/bootstrap')
+#subprocess.call(['make', 'clean', '-C', './srcs/cpp-lcurve/src'])
+subprocess.call(['make',  '-C', './srcs/cpp-lcurve/src'])
+os.system('cp ./srcs/cpp-lcurve/src/.libs/*.so pylcurve/lib/')
+subprocess.call(['make', 'clean', '-C', './srcs/cpp-lcurve'])
 
 VERSION = '0.0.0' 
 DESCRIPTION = 'python wrapper of lcurve'

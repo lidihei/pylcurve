@@ -27,7 +27,7 @@
  */
 
 void Lcurve::pylight_curve_comp(const Lcurve::Model& mdl,
-                              double *time, double *expose, int *ndiv, int Tsize,
+                              double *time, double *exposes, int *ndivs, int Tsize,
                               bool info,
                               double *calc, double *lcstar1, double *lcdisc,
                               double *lcedge, double *lcspot, double *lcstar2,
@@ -54,14 +54,14 @@ void Lcurve::pylight_curve_comp(const Lcurve::Model& mdl,
       double a = std::pow(gm/Subs::sqr(Constants::TWOPI/Constants::DAY/mdl.tperiod),1./3.);
       rlens1 = 4.*gm/(1.+mdl.q)/a/Subs::sqr(Constants::C);
   }
-   std::cout<<"lijiao pylight_curve_comp rlens1 =  " <<  rlens1<<std::endl;
-   std::cout<<"lijiao pylight_curve_comp llo =  " <<  mdl.llo<<std::endl;
+   // std::cout<<"lijiao pylight_curve_comp rlens1 =  " <<  rlens1<<std::endl;
+   // std::cout<<"lijiao pylight_curve_comp llo =  " <<  mdl.llo<<std::endl;
   // Generate arrays over each star's face. Fine grids first:
   Subs::Buffer1D<Point> star1f, star2f, disc, edge, spot;
-  std::cout<<"lijiao test 0-1 "<<std::endl;
+  // std::cout<<"lijiao test 0-1 "<<std::endl;
   set_star_grid(mdl, Roche::PRIMARY, true, star1f);
   if(info) std::cerr << "Number of points for star 1 (fine) = " << star1f.size() << std::endl;
-  std::cout<<"lijiao test 1-1 "<<std::endl;
+  // std::cout<<"lijiao test 1-1 "<<std::endl;
 
   set_star_grid(mdl, Roche::SECONDARY, true, star2f);
   if(info) std::cerr << "Number of points for star 2 (fine) = " << star2f.size() << std::endl;
@@ -99,9 +99,9 @@ void Lcurve::pylight_curve_comp(const Lcurve::Model& mdl,
   gint.phase2 = mdl.phase2;
   gint.scale11 = gint.scale12 = gint.scale21 = gint.scale22 = 1.;
 
-  std::cout << "lijiao test pylight_curve_comp.cc:  mdl.nlat1: " << mdl.nlat1f << std::endl;
+  // std::cout << "lijiao test pylight_curve_comp.cc:  mdl.nlat1: " << mdl.nlat1f << std::endl;
   if(mdl.nlat1c != mdl.nlat1f){
-      std::cout << "lijiao test pylight_curve_comp.cc comp_star1:  mdl.iangle " << mdl.iangle << std::endl;
+      // std::cout << "lijiao test pylight_curve_comp.cc comp_star1:  mdl.iangle " << mdl.iangle << std::endl;
       double ff = comp_star1(mdl.iangle, ldc1, 0.9999999999*mdl.phase1,
                              0., 1, mdl.q, mdl.beam_factor1,
                              mdl.velocity_scale, gint, star1f, star1c);
@@ -119,7 +119,7 @@ void Lcurve::pylight_curve_comp(const Lcurve::Model& mdl,
   }
 
   if(!copy2){
-      std::cout << "lijiao test pylight_curve_comp.cc comp_star2:  mdl.iangle " << mdl.iangle << std::endl;
+      // std::cout << "lijiao test pylight_curve_comp.cc comp_star2:  mdl.iangle " << mdl.iangle << std::endl;
       double ff = comp_star2(mdl.iangle, ldc2, 1-1.0000000001*mdl.phase2,
                              0., 1, mdl.q, mdl.beam_factor2,
                              mdl.velocity_scale, mdl.glens1, rlens1,
@@ -220,17 +220,19 @@ void Lcurve::pylight_curve_comp(const Lcurve::Model& mdl,
   // which is very likely to be the case. However, since the time per point is
   // large, overheads should not be too bad.
 
+/* lijiao
 #ifdef _OPENMP
   int mxth = std::min(16, omp_get_max_threads());
   omp_set_num_threads(mxth);
 #pragma omp parallel for schedule(dynamic) if(Tsize > 4)
 #endif
+lijiao*/
 
   for(int np=0; np<Tsize; np++){
-
+      // std::cout<< "lijiao check np = " << np << "/" << Tsize << std::endl;
       // Compute phase, accounting for quadratic term
       double phase  = (time[np]-mdl.t0)/mdl.period;
-
+      int ndivi = ndivs[np];
       // small Newton-Raphson iteration
       for(int it=0; it<4; it++){
           phase -= (mdl.t0+phase*(mdl.period+mdl.pdot*phase)-time[np])/
@@ -240,48 +242,63 @@ void Lcurve::pylight_curve_comp(const Lcurve::Model& mdl,
       // advance/retard by time offset between primary & secondary eclipse
       phase += mdl.deltat/mdl.period/2.*(std::cos(2.*Constants::PI*phase)-1.);
 
-      double exposei = expose[np]/mdl.period;
+      double exposei = exposes[np]/mdl.period;
       double frac = (time[np]-middle)/range;
       double slfac  = 1. + frac*(mdl.slope+frac*(mdl.quad+frac*mdl.cube));
       if(mdl.iscale){
           lcstar1[np] = slfac*comp_star1(mdl.iangle, ldc1, phase, exposei,
-                                         ndiv[np], mdl.q,
+                                         ndivi, mdl.q,
                                          mdl.beam_factor1, mdl.velocity_scale,
                                          gint, star1f, star1c);
 
           lcdisc[np] = slfac*comp_disc(mdl.iangle, mdl.lin_limb_disc,
                                        mdl.quad_limb_disc, phase, exposei,
-                                       ndiv[np], mdl.q,
+                                       ndivi, mdl.q,
                                        mdl.velocity_scale, disc);
 
           lcedge[np] = slfac*comp_edge(mdl.iangle, mdl.lin_limb_disc,
                                        mdl.quad_limb_disc, phase, exposei,
-                                       ndiv[np], mdl.q,
+                                       ndivi, mdl.q,
                                        mdl.velocity_scale, edge);
 
           lcspot[np] = slfac*comp_spot(mdl.iangle, phase, exposei,
-                                         ndiv[np], mdl.q,
+                                         ndivi, mdl.q,
                                          mdl.velocity_scale, spot);
-
+          /*std::cout<< "lijiao check lcstar1["<<np<<"] = " << lcstar1[np] << std::endl;
+          std::cout<< "lijiao check lcdisc["<<np<<"] = " << lcdisc[np]  << std::endl;
+          std::cout<< "lijiao check lcedge["<<np<<"] = " << lcedge[np]  << std::endl;
+          std::cout<< "lijiao check lcspot["<<np<<"] = " << lcspot[np]  << std::endl;*/
           if(mdl.t2 > 0)
               lcstar2[np] = slfac*comp_star2(mdl.iangle, ldc2, phase, exposei,
-                                              ndiv[np], mdl.q,
+                                              ndivi, mdl.q,
                                               mdl.beam_factor2,
                                               mdl.velocity_scale,
                                               mdl.glens1, rlens1,
                                               gint, star2f, star2c);
+              std::cout<< "lijiao check lcstar2["<<np<<"] = " << lcstar2[np] << std::endl;
 
       }else{
+          // calctmp = slfac*comp_light(mdl.iangle, ldc1, ldc2,  //lijiao
           calc[np] = slfac*comp_light(mdl.iangle, ldc1, ldc2,
                                       mdl.lin_limb_disc, mdl.quad_limb_disc,
-                                      phase, exposei, ndiv[np],
+                                      phase, exposei, ndivi,
                                       mdl.q, mdl.beam_factor1, mdl.beam_factor2,
                                       mdl.spin1, mdl.spin2, mdl.velocity_scale,
                                       mdl.glens1, rlens1, gint, star1f, star2f,
                                       star1c, star2c, disc, edge, spot) + mdl.third;
+          /*std::cout<< "lijiao check calc["<<np<<"] = " << "slfac=" << slfac << "; "<<  "calctmp = "<< calctmp << std::endl;
+          std::cout<< "lijiao check calc["<<np<<"] = " <<  calc[np] << std::endl;
+          std::cout<< "lijiao check ndivs["<<np<<"] = " <<  ndivs[np] << std::endl;
+          std::cout<< "lijiao check exposes["<<np<<"] = " <<  exposes[np] << std::endl;
+          std::cout<< "lijiao check ndivi-1["<<np<<"] = " <<  ndivi << std::endl;
+          std::cout<< "lijiao check time["<<np<<"] = " <<  time[np] << std::endl;
+          std::cout<< "lijiao check time["<<np<<"] phase = " <<  phase << std::endl;
+          
+          //std::cout<< "lijiao check calc["<<np<<"] = "<<calc[np] << "; slfac=" << slfac << std::endl;*/
       }
   }
 
+  std::cout<< "lijiao check start: Compute white dwarf contribution" << std::endl;
   // Compute white dwarf contribution
   Subs::Buffer1D<Point> fstar2;
   wdwarf = comp_star1(mdl.iangle, ldc1, 0.5, 0., 1, mdl.q, mdl.beam_factor1,

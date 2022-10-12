@@ -50,8 +50,8 @@ args.data.close()
 # compute lightcurve to set the scaling factor
 print('\nComputing model light curve ...\n')
 
-#subprocess.call([lroche,model,data,'0','12345','1','junk.dat','/null','yes'])
-subprocess.call([lroche,model,'none', '0', '1', '2', '0', '1', '12345','1', '1', 'junk.dat','/null', '1'])
+subprocess.call([lroche,model,data,'0','12345','1','junk.dat','/null','yes'])
+#subprocess.call([lroche,model,'none', '0', '1', '2', '0', '1', '12345','1', '1', 'junk.dat','/null', '1'])
 
 
 

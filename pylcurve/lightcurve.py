@@ -201,20 +201,28 @@ class lcurve:
         '''
         Tsize = len(times)
         ####--------------inintalize time and light curves arrays-----------------------------------------
-        if isinstance(expose, float): expose = expose*np.ones(Tsize, dtype=np.double)
-        if isinstance(ndiv, float): ndiv = ndiv*np.ones(Tsize, dtype=np.int)
+        times = np.array(times, dtype=np.float)
+        if isinstance(expose, float): 
+            expose = expose*np.ones(Tsize, dtype=np.float)
+        else:
+            expose = np.array(expose, dtype=np.float)
+
+        if isinstance(ndiv, int): 
+            ndiv = ndiv*np.ones(Tsize, dtype=np.int32)
+        else:
+            ndiv = np.array(ndiv, dtype=np.int32)
         calc, lcstar1, lcdisc, lcedge, lcspot, lcstar2 = np.empty((6, Tsize), dtype=np.float)
         ####----------------------- declare variables------------------------------------------------------
         times = times.ctypes.data_as(POINTER(c_double*Tsize))
         expose = expose.ctypes.data_as(POINTER(c_double*Tsize))
-        ndiv = ndiv.ctypes.data_as(POINTER(c_int*Tsize))
+        ndiv = ndiv.ctypes.data_as(POINTER(c_int32*Tsize))
         calc = calc.ctypes.data_as(POINTER(c_double*Tsize))
         lcstar1 = lcstar1.ctypes.data_as(POINTER(c_double*Tsize))
         lcdisc = lcdisc.ctypes.data_as(POINTER(c_double*Tsize))
         lcedge = lcedge.ctypes.data_as(POINTER(c_double*Tsize))
         lcspot = lcspot.ctypes.data_as(POINTER(c_double*Tsize))
         lcstar2 = lcstar2.ctypes.data_as(POINTER(c_double*Tsize))
-        Tsize = c_int(Tsize)
+        Tsize = c_int32(Tsize)
         #### Binary and stars
         q_value, q_range, q_dstep, q_vary,  q_defined = c_double(q_value), c_double(q_range), c_double(q_dstep), c_bool(q_vary), c_bool(q_defined)
         iangle_value, iangle_range, iangle_dstep, iangle_vary,  iangle_defined = c_double(iangle_value), c_double(iangle_range), c_double(iangle_dstep), c_bool(iangle_vary), c_bool(iangle_defined)
@@ -281,13 +289,15 @@ class lcurve:
         tilt_spot_value, tilt_spot_range, tilt_spot_dstep, tilt_spot_vary,  tilt_spot_defined = c_double(tilt_spot_value), c_double(tilt_spot_range), c_double(tilt_spot_dstep), c_bool(tilt_spot_vary), c_bool(tilt_spot_defined)
         cfrac_spot_value, cfrac_spot_range, cfrac_spot_dstep, cfrac_spot_vary,  cfrac_spot_defined = c_double(cfrac_spot_value), c_double(cfrac_spot_range), c_double(cfrac_spot_dstep), c_bool(cfrac_spot_vary), c_bool(cfrac_spot_defined)
         #### Computational parameters
-        delta_phase, nlat1f, nlat2f, nlat1c, nlat2c, npole = c_double(delta_phase), c_int(nlat1f), c_int(nlat2f), c_int(nlat1c), c_int(nlat2c), c_bool(npole)
-        nlatfill, nlngfill, lfudge, llo, lhi, phase1, phase2, nrad, wavelength = c_int(nlatfill), c_int(nlngfill), c_double(lfudge), c_double(llo), c_double(lhi), c_double(phase1), c_double(phase2), c_int(nrad), c_double(wavelength)
+        delta_phase, nlat1f, nlat2f, nlat1c, nlat2c, npole = c_double(delta_phase), c_int32(nlat1f), c_int32(nlat2f), c_int32(nlat1c), c_int32(nlat2c), c_bool(npole)
+        nlatfill, nlngfill, lfudge, llo, lhi, phase1, phase2, nrad, wavelength = c_int32(nlatfill), c_int32(nlngfill), c_double(lfudge), c_double(llo), c_double(lhi), c_double(phase1), c_double(phase2), c_int32(nrad), c_double(wavelength)
         roche1, roche2, eclipse1, eclipse2, glens1, use_radii = c_bool(roche1), c_bool(roche2), c_bool(eclipse1), c_bool(eclipse2), c_bool(glens1), c_bool(use_radii)
         tperiod, gdark_bolom1, gdark_bolom2, mucrit1, mucrit2 = c_double(tperiod),c_double(gdark_bolom1),c_double(gdark_bolom2),c_double(mucrit1),c_double(mucrit2)
-        mirror, add_disc, opaque, add_spot, nspot, iscale, info = c_bool(mirror), c_bool(add_disc), c_bool(opaque), c_bool(add_spot), c_int(nspot), c_bool(iscale), c_bool(info),
-        slimb1 = create_string_buffer(slimb1.encode(), size=len(slimb1))
-        slimb2 = create_string_buffer(slimb2.encode(), size=len(slimb2))
+        mirror, add_disc, opaque, add_spot, nspot, iscale, info = c_bool(mirror), c_bool(add_disc), c_bool(opaque), c_bool(add_spot), c_int32(nspot), c_bool(iscale), c_bool(info),
+        #slimb1 = create_string_buffer(slimb1.encode(), size=len(slimb1))
+        #slimb2 = create_string_buffer(slimb2.encode(), size=len(slimb2))
+        pslimb1 = c_char_p(slimb1.encode())
+        pslimb2 = c_char_p(slimb2.encode())
 
         libpylcurve=self.libpylcurve
         libpylcurve.pylcurve(
@@ -364,7 +374,7 @@ class lcurve:
                   nlatfill, nlngfill, lfudge, llo, lhi, phase1, phase2, nrad, wavelength,
                   roche1, roche2, eclipse1, eclipse2, glens1, use_radii,
                   tperiod, gdark_bolom1, gdark_bolom2, mucrit1, mucrit2,
-                  slimb1, slimb2, mirror, add_disc, opaque, add_spot, nspot, iscale, info
+                  pslimb1, pslimb2, mirror, add_disc, opaque, add_spot, nspot, iscale, info
                             )
         self.libpylcurve  = libpylcurve
         print('ok')
@@ -375,41 +385,67 @@ class lcurve:
         -----------------------------------------------------------------------
         smodel [str] --- the name of modle file
         times [float array 1D] --- it must be 1D np.array
-        wdwarf [float] --- White dwarf's contribution
+        expose [float array 1D] --- The exposure length in the same units as the time
+        ndiv [int or int array 1D] --- Factor to split up data points to allow for finite exposures
+        info [bool] --- if true, it prints out array sizes to stderr
+        returns:
+        -----------------------------------------------------------------------
+        calc [array]  --- the calculated light curve
+        self.calc
+        self.lcstar1
+        self.lcstar2
+        self.lcdisc
+        self.lcedge
+        self.lcspot
+        self.wdwarf [float] --- White dwarf's contribution
         logg1 [float] --- flux-weighted logg of star1
         logg2 [float] --- flux-weighted logg of star2
         rv1: [float] --- volume-averaged radius of star1
         rv2: [float] --- volume-averaged radius of star2
-        expose [float array 1D] --- The exposure length in the same units as the time
-        ndiv [int or int array 1D] --- Factor to split up data points to allow for finite exposures
-        info [bool] --- if true, it prints out array sizes to stderr
         '''
         Tsize = len(times)
         ####--------------inintalize time and light curves arrays-----------------------------------------
-        if isinstance(expose, float): expose = expose*np.ones(Tsize, dtype=np.double)
-        if isinstance(ndiv, float): ndiv = ndiv*np.ones(Tsize, dtype=np.int)
+        times = np.array(times, dtype=np.float)
+        if isinstance(expose, float): 
+            expose = expose*np.ones(Tsize, dtype=np.float)
+        else:
+            expose = np.array(expose, dtype=np.float)
+
+        if isinstance(ndiv, int): 
+            ndiv = ndiv*np.ones(Tsize, dtype=np.int32)
+        else:
+            ndiv = np.array(ndiv, dtype=np.int32)
         calc, lcstar1, lcdisc, lcedge, lcspot, lcstar2 = np.empty((6, Tsize), dtype=np.float)
         ####----------------------- declare variables------------------------------------------------------
-        smodel = create_string_buffer(smodel.encode(), size=len(smodel))
-        times = times.ctypes.data_as(POINTER(c_double*Tsize))
-        expose = expose.ctypes.data_as(POINTER(c_double*Tsize))
-        ndiv = ndiv.ctypes.data_as(POINTER(c_int*Tsize))
+        #smodel = create_string_buffer(smodel.encode(), size=len(smodel))
+        psmodel = c_char_p(smodel.encode())
+        times = times.ctypes.data_as(POINTER(c_double))
+        expose = expose.ctypes.data_as(POINTER(c_double))
+        ndiv = ndiv.ctypes.data_as(POINTER(c_int32))
         calc = calc.ctypes.data_as(POINTER(c_double*Tsize))
         lcstar1 = lcstar1.ctypes.data_as(POINTER(c_double*Tsize))
         lcdisc = lcdisc.ctypes.data_as(POINTER(c_double*Tsize))
         lcedge = lcedge.ctypes.data_as(POINTER(c_double*Tsize))
         lcspot = lcspot.ctypes.data_as(POINTER(c_double*Tsize))
         lcstar2 = lcstar2.ctypes.data_as(POINTER(c_double*Tsize))
-        #wdwarf = c_double(wdwarf)
-        #logg1 = c_double(logg1)
-        #logg2 = c_double(logg2)
-        #rv1 = c_double(rv1)
-        #rv2 = c_double(rv2)
+        wdwarf = c_double(0.)
+        logg1 = c_double(0.)
+        logg2 = c_double(0.)
+        rv1 = c_double(0.)
+        rv2 = c_double(0.)
         info = c_bool(info)
         libpylcurve=self.libpylcurve
-        libpylcurve.pylcurve_smodel(smodel, 
+        libpylcurve.pylcurve_smodel(psmodel, 
                       times, expose, ndiv, Tsize,
                       info,
                       calc, lcstar1, lcdisc,
                       lcedge, lcspot, lcstar2)
+        self.calc = np.array(calc.contents)
+        #self.lcstar1 = np.array(list(lcstar1.contents))
+        #self.lcstar2 = np.array(list(lcstar2.contents))
+        #self.lcdisc = np.array(list(lcdisc.contents))
+        #self.lcedge = np.array(list(lcedge.contents))
+        #self.lcspot = np.array(list(lcspot.contents))
+        #self.wdwarf = wdwarf
         print('ok')
+        print('wdwarf')

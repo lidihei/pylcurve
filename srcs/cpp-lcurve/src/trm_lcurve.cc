@@ -427,7 +427,7 @@ Lcurve::Model::Model(//Binary and stars
                      int nlatfill, int nlngfill, double lfudge, double llo, double lhi, double phase1, double phase2, int nrad, double wavelength,
                      bool roche1, bool roche2, bool eclipse1, bool eclipse2, bool glens1, bool use_radii,
                      double tperiod, double gdark_bolom1, double gdark_bolom2, double mucrit1, double mucrit2, 
-                     const char *slimb1, const char *slimb2, bool mirror, bool add_disc, bool opaque, bool add_spot, int nspot, bool iscale
+                     const char* pslimb1, const char* pslimb2, bool mirror, bool add_disc, bool opaque, bool add_spot, int nspot, bool iscale
                     ) {
 
 
@@ -532,22 +532,24 @@ Lcurve::Model::Model(//Binary and stars
 
     if(glens1 && roche1)
       throw Lcurve_Error("For reasons of simplicity, glens1 = 1 and roche1 = 1 are not simultaneously allowed");
-
-    if(strcmp(slimb1, "Poly") == 0){
+    std::string slimb1 = pslimb1;
+    std::string slimb2 = pslimb2;
+    //if(strcmp(pslimb1, "Poly") == 0){
+    if(slimb1 == "Poly"){
         limb1 = LDC::POLY;
-    }else if(strcmp(slimb1, "Claret") == 0){
+    }else if(slimb1 ==  "Claret"){
         limb1 = LDC::CLARET;
     }else{
         throw Lcurve_Error("Could not recognize the value of slimb1 = " +
-                           std::string(slimb1) + "; should be 'Poly' or 'Claret'");
+                           slimb1 + "; should be 'Poly' or 'Claret'");
     }
-    if(strcmp(slimb2, "Poly") == 0){
+    if(slimb2 == "Poly"){
         limb2 = LDC::POLY;
-    }else if(strcmp(slimb2, "Claret") == 0){
+    }else if(slimb2 == "Claret"){
         limb2 = LDC::CLARET;
     }else{
         throw Lcurve_Error("Could not recognize the value of slimb2 = " +
-                           std::string(slimb2) + "; should be 'Poly' or 'Claret'");
+                           slimb2 + "; should be 'Poly' or 'Claret'");
     }
 
 }

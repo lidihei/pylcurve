@@ -325,7 +325,7 @@ Subs::Buffer1D<double> Lcurve::Fobj::scale_min;
 
 // Main program
 extern "C"{
-    void pylcurve(double *time, double *expose, int *ndiv, int Tsize,
+    void pylcurve(double *times, double *exposes, int *ndivs, int Tsize,
                   double *calc, double *lcstar1, double *lcdisc,
                   double *lcedge, double *lcspot, double *lcstar2,
                   //Binary and stars 
@@ -398,7 +398,7 @@ extern "C"{
                   int nlatfill, int nlngfill, double lfudge, double llo, double lhi, double phase1, double phase2, int nrad, double wavelength,
                   bool roche1, bool roche2, bool eclipse1, bool eclipse2, bool glens1, bool use_radii,
                   double tperiod, double gdark_bolom1, double gdark_bolom2, double mucrit1, double mucrit2, 
-                  const char *slimb1, const char *slimb2, bool mirror, bool add_disc, bool opaque, bool add_spot, int nspot, bool iscale, bool info
+                  const char* pslimb1, const char* pslimb2, bool mirror, bool add_disc, bool opaque, bool add_spot, int nspot, bool iscale, bool info
                    ){
         try{
             //added by lijiao  
@@ -472,14 +472,14 @@ extern "C"{
                           nlatfill,  nlngfill,  lfudge,  llo,  lhi,  phase1,  phase2,  nrad,  wavelength,
                           roche1,  roche2,  eclipse1,  eclipse2,  glens1,  use_radii,
                           tperiod,  gdark_bolom1,  gdark_bolom2,  mucrit1,  mucrit2, 
-                          slimb1,  slimb2,  mirror,  add_disc,  opaque,  add_spot,  nspot,  iscale
+                          pslimb1,  pslimb2,  mirror,  add_disc,  opaque,  add_spot,  nspot,  iscale
                         );
              
     
     
             // Compute light curve
             double wdwarf, chisq, wnok, logg1, logg2, rv1, rv2;
-            Lcurve::pylight_curve_comp(model, time, expose, ndiv, Tsize, info, calc,
+            Lcurve::pylight_curve_comp(model, times, exposes, ndivs, Tsize, info, calc,
                                        lcstar1, lcdisc, lcedge, lcspot, lcstar2,
                                        wdwarf, logg1, logg2, rv1, rv2);
     
@@ -512,16 +512,18 @@ extern "C"{
     }//void pylcurve(
 
 
-   void pylcurve_smodel(const char *smodel, 
-                      double *time, double *expose, int *ndiv, int Tsize,
+   void pylcurve_smodel(const char* psmodel, 
+                      double *times, double *exposes, int *ndivs, int Tsize,
                       bool info,
                       double *calc, double *lcstar1, double *lcdisc,
                       double *lcedge, double *lcspot, double *lcstar2){
         try{
+            const std::string smodel = psmodel;
             Lcurve::Model model(smodel);
+            //free(psmodel);
             // Compute light curve
             double wdwarf, chisq, wnok, logg1, logg2, rv1, rv2;
-            Lcurve::pylight_curve_comp(model, time, expose, ndiv, Tsize, info, calc,
+            Lcurve::pylight_curve_comp(model, times, exposes, ndivs, Tsize, info, calc,
                                        lcstar1, lcdisc, lcedge, lcspot, lcstar2,
                                        wdwarf, logg1, logg2, rv1, rv2);
     

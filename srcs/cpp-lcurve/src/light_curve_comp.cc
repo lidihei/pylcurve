@@ -56,8 +56,8 @@ void Lcurve::light_curve_comp(const Lcurve::Model& mdl,
       double a = std::pow(gm/Subs::sqr(Constants::TWOPI/Constants::DAY/mdl.tperiod),1./3.);
       rlens1 = 4.*gm/(1.+mdl.q)/a/Subs::sqr(Constants::C);
   }
-  std::cout<<"lijiao light_curve_comp rlens1 =  " <<  rlens1<<std::endl;
-  std::cout<<"lijiao light_curve_comp llo =  " <<  mdl.llo<<std::endl;
+  // std::cout<<"lijiao light_curve_comp rlens1 =  " <<  rlens1<<std::endl;
+  // std::cout<<"lijiao light_curve_comp llo =  " <<  mdl.llo<<std::endl;
   // Generate arrays over each star's face. Fine grids first:
   Subs::Buffer1D<Point> star1f, star2f, disc, edge, spot;
   set_star_grid(mdl, Roche::PRIMARY, true, star1f);
@@ -99,9 +99,9 @@ void Lcurve::light_curve_comp(const Lcurve::Model& mdl,
   gint.phase2 = mdl.phase2;
   gint.scale11 = gint.scale12 = gint.scale21 = gint.scale22 = 1.;
 
-  std::cout << "lijiao test light_curve_comp.cc:  mdl.nlat1: " << mdl.nlat1f << std::endl;
+  // std::cout << "lijiao test light_curve_comp.cc:  mdl.nlat1: " << mdl.nlat1f << std::endl;
   if(mdl.nlat1c != mdl.nlat1f){
-      std::cout << "lijiao test light_curve_comp.cc comp_star1:  mdl.iangle " << mdl.iangle << std::endl;
+      // std::cout << "lijiao test light_curve_comp.cc comp_star1:  mdl.iangle " << mdl.iangle << std::endl;
       double ff = comp_star1(mdl.iangle, ldc1, 0.9999999999*mdl.phase1,
                              0., 1, mdl.q, mdl.beam_factor1,
                              mdl.velocity_scale, gint, star1f, star1c);
@@ -119,7 +119,7 @@ void Lcurve::light_curve_comp(const Lcurve::Model& mdl,
   }
 
   if(!copy2){
-      std::cout << "lijiao test light_curve_comp.cc comp_star2:  mdl.iangle " << mdl.iangle << std::endl;
+      // std::cout << "lijiao test light_curve_comp.cc comp_star2:  mdl.iangle " << mdl.iangle << std::endl;
       double ff = comp_star2(mdl.iangle, ldc2, 1-1.0000000001*mdl.phase2,
                              0., 1, mdl.q, mdl.beam_factor2,
                              mdl.velocity_scale, mdl.glens1, rlens1,
