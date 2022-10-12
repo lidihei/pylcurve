@@ -49,7 +49,7 @@ void Lcurve::set_star_grid(const Model& mdl, Roche::STAR which_star, bool fine,
 
     double r1, r2;
     mdl.get_r1r2(r1, r2);
-
+    std::cout << "lijiao test set_star_grid.cc 52 mdl.nlat1f=" <<mdl.nlat1f<<"; mdl.nlat1c=" << mdl.nlat1c << "; mdl.nlat2f=" << mdl.nlat2f <<"; mdl.nlat2c=" << mdl.nlat2c<<std::endl;
     bool eclipse = which_star == Roche::PRIMARY ? mdl.eclipse1 : mdl.eclipse2;
     int nlat     = which_star == Roche::PRIMARY ? (fine ? mdl.nlat1f : mdl.nlat1c) :
         (fine ? mdl.nlat2f : mdl.nlat2c);
@@ -82,7 +82,6 @@ void Lcurve::set_star_grid(const Model& mdl, Roche::STAR which_star, bool fine,
     // star to the point in question Here it is assumed that d = a - R/2, the
     // orbital separation minus half the radius of the star being eclipse,
     // which is approximate but should not be too bad.
-
     if(mdl.glens1 && which_star == Roche::SECONDARY){
 
         // Compute G(M1+M2), SI, and the separation a, SI.
@@ -94,6 +93,7 @@ void Lcurve::set_star_grid(const Model& mdl, Roche::STAR which_star, bool fine,
         if(r1 < 0) throw Lcurve_Error("set_star_grid: gravitational lensing correction more than the current program can cope with.");
     }
 
+     std::cout<<"lijiao test set_star_grid.cc 1 "<<std::endl;
     // Calculate a reference radius and potential for the two stars
     double rref1, pref1, ffac1 = r1/rl1;
     Roche::ref_sphere(mdl.q, Roche::PRIMARY, mdl.spin1, ffac1, rref1, pref1);
@@ -101,6 +101,7 @@ void Lcurve::set_star_grid(const Model& mdl, Roche::STAR which_star, bool fine,
     double rref2, pref2, ffac2 = r2/rl2;
     Roche::ref_sphere(mdl.q, Roche::SECONDARY, mdl.spin2, ffac2, rref2, pref2);
 
+     std::cout<<"lijiao test set_star_grid.cc 104 "<<std::endl;
     // Compute latitude range over which extra points will be added. Only enabled
     // when setting the secondary grid and when the grid North pole is the genuine
     // North pole and when r2 > r1
@@ -152,9 +153,12 @@ void Lcurve::set_star_grid(const Model& mdl, Roche::STAR which_star, bool fine,
         }
     }
 
+     std::cout<<"lijiao test set_star_grid.cc 156 "<<std::endl;
     // Compute number of faces needed
     const int NFACE = Lcurve::numface(nlat, infill, thelo, thehi, nlatfill, nlngfill);
-
+     // nlat is fault lijiao note
+     std::cout<<"lijiao test set_star_grid.cc 158 "<< nlat <<","<<infill<<"," << thelo<< ","<< thehi<<"," << nlatfill <<"," <<nlngfill <<std::endl;
+     std::cout<<"lijiao test set_star_grid.cc 158: const int NFACE " << NFACE<<std::endl;
     // Generate arrays over the star's face
     try{
         star.resize(NFACE);
@@ -165,6 +169,7 @@ void Lcurve::set_star_grid(const Model& mdl, Roche::STAR which_star, bool fine,
             throw Lcurve_Error("set_star_grid: failed to allocated enough memory for star 2");
     }
 
+     std::cout<<"lijiao test set_star_grid.cc 170"<<std::endl;
     const double ACC = mdl.delta_phase/10.;
 
     Subs::Vec3 dirn, posn, vec;
@@ -190,6 +195,7 @@ void Lcurve::set_star_grid(const Model& mdl, Roche::STAR which_star, bool fine,
 
     }
 
+     std::cout<<"lijiao test set_star_grid.cc 196 "<<std::endl;
     // The grid starts at the North pole and ends at the South, proceeding in
     // a series of equi-latitudinal rings.  The polar axis is parallel to the
     // x-axis which points from one star to the other. The North pole is
@@ -204,16 +210,20 @@ void Lcurve::set_star_grid(const Model& mdl, Roche::STAR which_star, bool fine,
         add_faces(star, nface, 0., thelo, dtheta, 0, 0, mdl.npole, which_star, mdl.q, mdl.iangle,
                   r1, r2, rref1, rref2, mdl.roche1, mdl.roche2, mdl.spin1, mdl.spin2, eclipse, gref,
                   pref1, pref2, ffac1, ffac2, mdl.delta_phase);
+     std::cout<<"lijiao test set_star_grid.cc 210 "<<std::endl;
         add_faces(star, nface, thelo, thehi, dtheta, nlatfill, nlngfill, mdl.npole, which_star, mdl.q,
                   mdl.iangle, r1, r2, rref1, rref2, mdl.roche1, mdl.roche2, mdl.spin1, mdl.spin2,
                   eclipse, gref, pref1, pref2, ffac1, ffac2, mdl.delta_phase);
+     std::cout<<"lijiao test set_star_grid.cc 214 "<<std::endl;
         add_faces(star, nface, thehi, Constants::PI, dtheta, 0, 0, mdl.npole, which_star, mdl.q, mdl.iangle,
                   r1, r2, rref1, rref2, mdl.roche1, mdl.roche2, mdl.spin1, mdl.spin2, eclipse, gref,
                   pref1, pref2, ffac1, ffac2, mdl.delta_phase);
+     std::cout<<"lijiao test set_star_grid.cc 219 "<<std::endl;
     }else{
         add_faces(star, nface, 0., Constants::PI, dtheta, 0, 0, mdl.npole, which_star, mdl.q, mdl.iangle,
                   r1, r2, rref1, rref2, mdl.roche1, mdl.roche2, mdl.spin1, mdl.spin2, eclipse, gref,
                   pref1, pref2, ffac1, ffac2, mdl.delta_phase);
+     std::cout<<"lijiao test set_star_grid.cc 252 "<<std::endl;
     }
 }
 
@@ -249,6 +259,7 @@ void Lcurve::add_faces(Subs::Buffer1D<Lcurve::Point>& star, int& nface, double t
     // to counting up on the fly.
     std::vector<int> off(nlat);
 
+     std::cout<<"lijiao test set_star_grid.cc 260 "<<std::endl;
     double sint;
     for(int nt=0; nt<nlat; nt++){
         off[nt] = nface;

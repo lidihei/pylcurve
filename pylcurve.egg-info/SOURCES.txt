@@ -24,6 +24,7 @@ srcs/cpp-lcurve/Lcurve
 srcs/cpp-lcurve/Makefile.am
 srcs/cpp-lcurve/NEWS
 srcs/cpp-lcurve/README
+srcs/cpp-lcurve/aclocal.m4
 srcs/cpp-lcurve/bootstrap
 srcs/cpp-lcurve/config.h
 srcs/cpp-lcurve/config.h.in
@@ -59,6 +60,7 @@ srcs/cpp-lcurve/doc/guide.html
 srcs/cpp-lcurve/doc/style.css
 srcs/cpp-lcurve/include/Makefile.am
 srcs/cpp-lcurve/include/trm/lcurve.h
+srcs/cpp-lcurve/m4/pgplot.m4
 srcs/cpp-lcurve/scripts/example_data_file
 srcs/cpp-lcurve/scripts/example_model_file
 srcs/cpp-lcurve/scripts/junk.dat
@@ -92,6 +94,21 @@ srcs/cpp-lcurve/src/simplex.cc
 srcs/cpp-lcurve/src/star_eclipse.cc
 srcs/cpp-lcurve/src/trm_lcurve.cc
 srcs/cpp-lcurve/src/visualise.cc
+srcs/cpp-lcurve/src/.deps/libpylcurve_la-comp_gravity.Plo
+srcs/cpp-lcurve/src/.deps/libpylcurve_la-comp_light.Plo
+srcs/cpp-lcurve/src/.deps/libpylcurve_la-comp_radius.Plo
+srcs/cpp-lcurve/src/.deps/libpylcurve_la-libpylcurve.Plo
+srcs/cpp-lcurve/src/.deps/libpylcurve_la-light_curve_comp.Plo
+srcs/cpp-lcurve/src/.deps/libpylcurve_la-numface.Plo
+srcs/cpp-lcurve/src/.deps/libpylcurve_la-pylight_curve_comp.Plo
+srcs/cpp-lcurve/src/.deps/libpylcurve_la-re_scale.Plo
+srcs/cpp-lcurve/src/.deps/libpylcurve_la-set_bright_spot_grid.Plo
+srcs/cpp-lcurve/src/.deps/libpylcurve_la-set_disc_continuum.Plo
+srcs/cpp-lcurve/src/.deps/libpylcurve_la-set_disc_grid.Plo
+srcs/cpp-lcurve/src/.deps/libpylcurve_la-set_star_continuum.Plo
+srcs/cpp-lcurve/src/.deps/libpylcurve_la-set_star_grid.Plo
+srcs/cpp-lcurve/src/.deps/libpylcurve_la-star_eclipse.Plo
+srcs/cpp-lcurve/src/.deps/libpylcurve_la-trm_lcurve.Plo
 test/example_data_file
 test/example_model_file
 test/log

@@ -289,11 +289,11 @@ class lcurve:
         tilt_spot_value, tilt_spot_range, tilt_spot_dstep, tilt_spot_vary,  tilt_spot_defined = c_double(tilt_spot_value), c_double(tilt_spot_range), c_double(tilt_spot_dstep), c_bool(tilt_spot_vary), c_bool(tilt_spot_defined)
         cfrac_spot_value, cfrac_spot_range, cfrac_spot_dstep, cfrac_spot_vary,  cfrac_spot_defined = c_double(cfrac_spot_value), c_double(cfrac_spot_range), c_double(cfrac_spot_dstep), c_bool(cfrac_spot_vary), c_bool(cfrac_spot_defined)
         #### Computational parameters
-        delta_phase, nlat1f, nlat2f, nlat1c, nlat2c, npole = c_double(delta_phase), c_int32(nlat1f), c_int32(nlat2f), c_int32(nlat1c), c_int32(nlat2c), c_bool(npole)
-        nlatfill, nlngfill, lfudge, llo, lhi, phase1, phase2, nrad, wavelength = c_int32(nlatfill), c_int32(nlngfill), c_double(lfudge), c_double(llo), c_double(lhi), c_double(phase1), c_double(phase2), c_int32(nrad), c_double(wavelength)
+        delta_phase, nlat1f, nlat2f, nlat1c, nlat2c, npole = c_double(delta_phase), c_int(nlat1f), c_int(nlat2f), c_int(nlat1c), c_int(nlat2c), c_bool(npole)
+        nlatfill, nlngfill, lfudge, llo, lhi, phase1, phase2, nrad, wavelength = c_int(nlatfill), c_int(nlngfill), c_double(lfudge), c_double(llo), c_double(lhi), c_double(phase1), c_double(phase2), c_int(nrad), c_double(wavelength)
         roche1, roche2, eclipse1, eclipse2, glens1, use_radii = c_bool(roche1), c_bool(roche2), c_bool(eclipse1), c_bool(eclipse2), c_bool(glens1), c_bool(use_radii)
         tperiod, gdark_bolom1, gdark_bolom2, mucrit1, mucrit2 = c_double(tperiod),c_double(gdark_bolom1),c_double(gdark_bolom2),c_double(mucrit1),c_double(mucrit2)
-        mirror, add_disc, opaque, add_spot, nspot, iscale, info = c_bool(mirror), c_bool(add_disc), c_bool(opaque), c_bool(add_spot), c_int32(nspot), c_bool(iscale), c_bool(info),
+        mirror, add_disc, opaque, add_spot, nspot, iscale, info = c_bool(mirror), c_bool(add_disc), c_bool(opaque), c_bool(add_spot), c_int(nspot), c_bool(iscale), c_bool(info),
         #slimb1 = create_string_buffer(slimb1.encode(), size=len(slimb1))
         #slimb2 = create_string_buffer(slimb2.encode(), size=len(slimb2))
         pslimb1 = c_char_p(slimb1.encode())

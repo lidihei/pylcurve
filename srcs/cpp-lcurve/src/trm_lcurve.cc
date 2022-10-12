@@ -529,7 +529,18 @@ Lcurve::Model::Model(//Binary and stars
     //   uesp_taper = Pparam(pv["uesp_taper"]);
     //   uesp_temp = Pparam(pv["uesp_temp"]);
     // }
-
+    this->delta_phase = delta_phase;
+    this->nlat1f = nlat1f, this->nlat2f = nlat2f, this->nlat1c = nlat1c, this->nlat2c = nlat2c;
+    this->npole = npole; this->nlatfill = nlatfill, this->nlngfill = nlngfill;
+    this->lfudge = lfudge, this->llo = llo, this->lhi = lhi;
+    this->phase1 = phase1, this->phase2 = phase2, this->nrad = nrad;
+    this->wavelength = wavelength;
+    this->roche1 = roche1, this->roche2 = roche2, this->eclipse1 = eclipse1, this->eclipse2 = eclipse2;
+    this->glens1 = glens1, this->use_radii = use_radii;
+    this->tperiod = tperiod, this->gdark_bolom1 = gdark_bolom1, this->gdark_bolom2 = gdark_bolom2;
+    this->mucrit1 = mucrit1, this->mucrit2 = mucrit2;
+    this->mirror = mirror, this->add_disc = add_disc, this->opaque = opaque, this->add_spot = add_spot, this->nspot = nspot;
+    this->iscale = iscale;
     if(glens1 && roche1)
       throw Lcurve_Error("For reasons of simplicity, glens1 = 1 and roche1 = 1 are not simultaneously allowed");
     std::string slimb1 = pslimb1;
