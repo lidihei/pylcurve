@@ -202,12 +202,12 @@ class lcurve:
         Tsize = len(times)
         ####--------------inintalize time and light curves arrays-----------------------------------------
         times = np.array(times, dtype=np.float)
-        if isinstance(expose, float): 
+        if isinstance(expose, float):
             expose = expose*np.ones(Tsize, dtype=np.float)
         else:
             expose = np.array(expose, dtype=np.float)
 
-        if isinstance(ndiv, int): 
+        if isinstance(ndiv, int):
             ndiv = ndiv*np.ones(Tsize, dtype=np.int32)
         else:
             ndiv = np.array(ndiv, dtype=np.int32)
@@ -408,12 +408,12 @@ class lcurve:
         Tsize = len(times)
         ####--------------inintalize time and light curves arrays-----------------------------------------
         times = np.array(times, dtype=np.float)
-        if isinstance(expose, float): 
+        if isinstance(expose, float):
             expose = expose*np.ones(Tsize, dtype=np.float)
         else:
             expose = np.array(expose, dtype=np.float)
 
-        if isinstance(ndiv, int): 
+        if isinstance(ndiv, int):
             ndiv = ndiv*np.ones(Tsize, dtype=np.int32)
         else:
             ndiv = np.array(ndiv, dtype=np.int32)

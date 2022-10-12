@@ -39,7 +39,7 @@ example/log
 *.Po
 *scripts/0651/*
 !*.cc
-*.m4
+*m4/l*.m4
 *doc/*.html
 *doc/html
 */config*
@@ -65,6 +65,8 @@ example/log
 */missing
 */COPYING
 */stamp-h1
+*/*.Plo
+*.deps/*
 
 
 *.swp
