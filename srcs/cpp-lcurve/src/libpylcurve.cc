@@ -327,7 +327,7 @@ Subs::Buffer1D<double> Lcurve::Fobj::scale_min;
 extern "C"{
     void pylcurve(double *times, double *exposes, int *ndivs, int Tsize,
                   double *calc, double *lcstar1, double *lcdisc,
-                  double *lcedge, double *lcspot, double *lcstar2,
+                  double *lcedge, double *lcspot, double *lcstar2, double *wdwarflogrv,
                   //Binary and stars 
                   double q_value, double q_range, double q_dstep, bool q_vary, bool q_defined,
                   double iangle_value, double iangle_range, double iangle_dstep, bool iangle_vary, bool iangle_defined, 
@@ -483,6 +483,11 @@ extern "C"{
                                        lcstar1, lcdisc, lcedge, lcspot, lcstar2,
                                        wdwarf, logg1, logg2, rv1, rv2);
     
+            wdwarflogrv[0] = wdwarf;
+            wdwarflogrv[1] = logg1;
+            wdwarflogrv[2] = logg2;
+            wdwarflogrv[3] = rv1;
+            wdwarflogrv[4] = rv2;
             std::cout << "White dwarf's contribution = " << wdwarf
                       << std::endl;
             std::cout << "log10(g1 [cgs]) = " << logg1 << std::endl;
@@ -516,17 +521,22 @@ extern "C"{
                       double *times, double *exposes, int *ndivs, int Tsize,
                       bool info,
                       double *calc, double *lcstar1, double *lcdisc,
-                      double *lcedge, double *lcspot, double *lcstar2){
+                      double *lcedge, double *lcspot, double *lcstar2,
+                      double *wdwarflogrv){
         try{
             const std::string smodel = psmodel;
             Lcurve::Model model(smodel);
             //free(psmodel);
             // Compute light curve
-            double wdwarf, chisq, wnok, logg1, logg2, rv1, rv2;
+            double wdwarf, logg1, logg2, rv1, rv2;
             Lcurve::pylight_curve_comp(model, times, exposes, ndivs, Tsize, info, calc,
                                        lcstar1, lcdisc, lcedge, lcspot, lcstar2,
                                        wdwarf, logg1, logg2, rv1, rv2);
-    
+            wdwarflogrv[0] = wdwarf;
+            wdwarflogrv[1] = logg1;
+            wdwarflogrv[2] = logg2;
+            wdwarflogrv[3] = rv1;
+            wdwarflogrv[4] = rv2;
             std::cout << "White dwarf's contribution = " << wdwarf
                       << std::endl;
             std::cout << "log10(g1 [cgs]) = " << logg1 << std::endl;

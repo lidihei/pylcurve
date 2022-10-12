@@ -22,9 +22,12 @@ import argparse
 import subprocess
 import pylab as plt
 import numpy as np
+import time
 
 # Light curve command: adjust this to point to wherever you have installed
 # lroche (try 'which lroche')
+
+tt = time.time()
 
 lroche = os.path.join(os.environ['TRM_SOFTWARE'],  'bin', 'lcurve', 'lroche')
 
@@ -53,7 +56,7 @@ print('\nComputing model light curve ...\n')
 subprocess.call([lroche,model,data,'0','12345','1','junk.dat','/null','yes'])
 #subprocess.call([lroche,model,'none', '0', '1', '2', '0', '1', '12345','1', '1', 'junk.dat','/null', '1'])
 
-
+print('calculated time', time.time()- tt) 
 
 '''
 # read result

@@ -107,6 +107,8 @@ srcs/cpp-lcurve/src/.deps/libpylcurve_la-set_star_continuum.Plo
 srcs/cpp-lcurve/src/.deps/libpylcurve_la-set_star_grid.Plo
 srcs/cpp-lcurve/src/.deps/libpylcurve_la-star_eclipse.Plo
 srcs/cpp-lcurve/src/.deps/libpylcurve_la-trm_lcurve.Plo
+test/example_data_file
 test/example_model_file
+test/log
 test/test.py
 test/test_smodle.py

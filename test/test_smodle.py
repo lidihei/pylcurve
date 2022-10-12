@@ -3,10 +3,11 @@ import os
 from pylcurve.lightcurve import lcurve
 import matplotlib.pyplot as plt
 from ctypes import *
+import time
 
 #lib = ctypes.CDLL('../pylcurve/lib/libpylcurve.so')
 
-
+tt = time.time()
 
 times = np.array([0,1], dtype=np.float)
 expose = np.array([2,2], dtype=np.float)/24/3600
@@ -25,6 +26,7 @@ llcurve = lcurve()
 smodel = 'example_model_file'
 llcurve.lc_from_smodel(smodel, times, expose=expose, ndiv=7)
 
+print('calculated time', time.time()- tt)
 fig, ax = plt.subplots(1,1,figsize=(8.5, 4))
 plt.plot(times, llcurve.calc)
 plt.show()

@@ -220,13 +220,11 @@ void Lcurve::pylight_curve_comp(const Lcurve::Model& mdl,
   // which is very likely to be the case. However, since the time per point is
   // large, overheads should not be too bad.
 
-/* lijiao
 #ifdef _OPENMP
   int mxth = std::min(16, omp_get_max_threads());
   omp_set_num_threads(mxth);
 #pragma omp parallel for schedule(dynamic) if(Tsize > 4)
 #endif
-lijiao*/
 
   for(int np=0; np<Tsize; np++){
       // std::cout<< "lijiao check np = " << np << "/" << Tsize << std::endl;
@@ -275,7 +273,7 @@ lijiao*/
                                               mdl.velocity_scale,
                                               mdl.glens1, rlens1,
                                               gint, star2f, star2c);
-              std::cout<< "lijiao check lcstar2["<<np<<"] = " << lcstar2[np] << std::endl;
+              // std::cout<< "lijiao check lcstar2["<<np<<"] = " << lcstar2[np] << std::endl;
 
       }else{
           // calctmp = slfac*comp_light(mdl.iangle, ldc1, ldc2,  //lijiao
@@ -298,7 +296,7 @@ lijiao*/
       }
   }
 
-  std::cout<< "lijiao check start: Compute white dwarf contribution" << std::endl;
+  // std::cout<< "lijiao check start: Compute white dwarf contribution" << std::endl;
   // Compute white dwarf contribution
   Subs::Buffer1D<Point> fstar2;
   wdwarf = comp_star1(mdl.iangle, ldc1, 0.5, 0., 1, mdl.q, mdl.beam_factor1,

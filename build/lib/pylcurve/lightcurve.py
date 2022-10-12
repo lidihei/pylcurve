@@ -298,12 +298,14 @@ class lcurve:
         #slimb2 = create_string_buffer(slimb2.encode(), size=len(slimb2))
         pslimb1 = c_char_p(slimb1.encode())
         pslimb2 = c_char_p(slimb2.encode())
+        wdwarflogrv = np.zeros(4, dtype=np.float)
+        wdwarflogrv = wdwarflogrv.ctypes.data_as(POINTER(c_double*5))
 
         libpylcurve=self.libpylcurve
         libpylcurve.pylcurve(
                   times, expose, ndiv, Tsize,
                   calc, lcstar1, lcdisc,
-                  lcedge, lcspot, lcstar2,
+                  lcedge, lcspot, lcstar2, wdwarflogrv,
                   #### Binary and stars 
                   q_value, q_range, q_dstep, q_vary, q_defined,
                   iangle_value, iangle_range, iangle_dstep, iangle_vary, iangle_defined,
@@ -428,24 +430,26 @@ class lcurve:
         lcedge = lcedge.ctypes.data_as(POINTER(c_double*Tsize))
         lcspot = lcspot.ctypes.data_as(POINTER(c_double*Tsize))
         lcstar2 = lcstar2.ctypes.data_as(POINTER(c_double*Tsize))
-        wdwarf = c_double(0.)
-        logg1 = c_double(0.)
-        logg2 = c_double(0.)
-        rv1 = c_double(0.)
-        rv2 = c_double(0.)
+        wdwarflogrv = np.zeros(4, dtype=np.float)
+        wdwarflogrv = wdwarflogrv.ctypes.data_as(POINTER(c_double*5))
         info = c_bool(info)
         libpylcurve=self.libpylcurve
         libpylcurve.pylcurve_smodel(psmodel, 
                       times, expose, ndiv, Tsize,
                       info,
                       calc, lcstar1, lcdisc,
-                      lcedge, lcspot, lcstar2)
+                      lcedge, lcspot, lcstar2, wdwarflogrv)
         self.calc = np.array(calc.contents)
-        #self.lcstar1 = np.array(list(lcstar1.contents))
-        #self.lcstar2 = np.array(list(lcstar2.contents))
-        #self.lcdisc = np.array(list(lcdisc.contents))
-        #self.lcedge = np.array(list(lcedge.contents))
-        #self.lcspot = np.array(list(lcspot.contents))
-        #self.wdwarf = wdwarf
+        self.lcstar1 = np.array(lcstar1.contents)
+        self.lcstar2 = np.array(lcstar2.contents)
+        self.lcdisc = np.array(lcdisc.contents)
+        self.lcedge = np.array(lcedge.contents)
+        self.lcspot = np.array(lcspot.contents)
+        wdwarflogrv = np.array(wdwarflogrv.contents)
+        self.wdwarf = wdwarflogrv[0]
+        self.logg1 = wdwarflogrv[1]
+        self.logg2 = wdwarflogrv[2]
+        self.rv1 = wdwarflogrv[3]
+        self.rv2 = wdwarflogrv[4]
         print('ok')
         print('wdwarf')
