@@ -12,15 +12,17 @@ The package of cpp-subs is based on pcre, pgplot, and slalib(C version)
 
 # installation:
 
-- set environment variables (e.g. write them into \~/.bashrc)
-export TRM_SOFTWARE= the_prefix_directory 
-export CPPFLAGS="-I$CONDA_PREFIX/include/ -I$TRM_SOFTWARE/local/include"
-export LDFLAGS="-L$CONDA_PREFIX/lib -L$TRM_SOFTWARE/local/lib"
-export CFLAGS="-I$CONDA_PREFIX/include/"
+- install pre
+- - $conda install -c anaconda pcre
 
-$CONDA_PREFIX
-conda install -c anaconda pcre
 if you install the pcre by using conda, then you should modified environment file of the include and lib
+
+
+- set environment variables (e.g. write them into \~/.bashrc)
+- - export TRM_SOFTWARE= the_prefix_directory 
+- - export CPPFLAGS="-I$CONDA_PREFIX/include/ -I$TRM_SOFTWARE/local/include"
+- - export LDFLAGS="-L$CONDA_PREFIX/lib -L$TRM_SOFTWARE/local/lib"
+- - export CFLAGS="-I$CONDA_PREFIX/include/"
 
 - install slalib (C version)
 - - should ask Tom Marsh Warwick (T.R.Marsh@warwick.ac.uk) to get this package
