@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>Plots the appearance of Roche-distorted stars in a binary</title>
+<link rel=stylesheet href="style.css" type="text/css">
+</head>
+<body>
+
+
+<p>
+<h1>visualise -- plots the appearance of Roche-distorted stars in a binary</h1>
+<p>
+<strong>visualise</strong> computes grids of points representing two stars and optionally a disc
+and plots those visible at a particular phase projected onto the plane of the sky.
+It can only handle stars less than or equal to their Roche lobes. This allows visualisation
+and checking of the eclipse computations.
+<p>
+<h2>Command invocation</h2>
+<p>
+visualise model nphase nphase (phase)/(phase1 phase2) device x1 x2 y1 y2
+<p>
+<h2>Arguments</h2>
+<p>
+<table>
+<tr valign="top"><td><i>model</i></td><td>---</td><td>Parameter file defining the model, as used e.g. by <a href="lroche.html">lrcohe</a>.</td></tr>
+<tr valign="top"><td><i>nphase</i></td><td>---</td><td>Number of orbital phases to display.</td></tr>
+<tr valign="top"><td><i>phase</i></td><td>---</td><td>Orbital phase if nphase=1</td></tr>
+<tr valign="top"><td><i>phase1</i></td><td>---</td><td>First orbital phase if nphase>1</td></tr>
+<tr valign="top"><td><i>phase2</i></td><td>---</td><td>Last orbital phase if nphase>1</td></tr>
+<tr valign="top"><td><i>device</i></td><td>---</td><td>Plot device</td></tr>
+<tr valign="top"><td><i>x1</i></td><td>---</td><td>left-hand X limit</td></tr>
+<tr valign="top"><td><i>x2</i></td><td>---</td><td>right-hand X limit</td></tr>
+<tr valign="top"><td><i>y1</i></td><td>---</td><td>lower Y limit</td></tr>
+<tr valign="top"><td><i>y2</i></td><td>---</td><td>upper Y limit</td></tr>
+<tr valign="top"><td><i>width</i></td><td>---</td><td>width of plot in inches</td></tr>
+<tr valign="top"><td><i>reverse</i></td><td>---</td><td>reverse black and white (or not)</td></tr>
+</table>
+<p>
+
+
+<h2>Classes</h2>
+
+<p>
+This command is a member of the class: <a href="Model.html">Model</a>.
+
+<p>
+Author: T.R.Marsh<br>
+Created: 17 Sep 2003<br>
+Revised: 29 May 2011<br>
+
+<p>
+<hr>
+<address>Page generated Tue Oct 11 16:31:26 2022</address>
+</body>
+</html>

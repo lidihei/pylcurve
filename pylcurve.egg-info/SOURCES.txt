@@ -4,11 +4,6 @@ Makefile_pylcurve
 README.md
 setup.py
 dist/pylcurve-0.0.0-py3.8.egg
-example/example_data_file
-example/example_model_file
-example/run
-example/test.data
-example/tsigma.py
 pylcurve/__init__.py
 pylcurve/lightcurve.py
 pylcurve.egg-info/PKG-INFO
@@ -112,5 +107,3 @@ srcs/cpp-lcurve/src/.deps/libpylcurve_la-trm_lcurve.Plo
 test/example_data_file
 test/example_model_file
 test/log
-test/test.py
-test/test_smodle.py

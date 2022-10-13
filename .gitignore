@@ -40,8 +40,8 @@ example/log
 *scripts/0651/*
 !*.cc
 *m4/l*.m4
-*doc/*.html
-*doc/html
+srcs/*doc/*.html
+srcs/*doc/html
 */config*
 */aclocal.m4
 */compile

@@ -103,7 +103,7 @@ setup(
             "Topic :: Scientific/Engineering :: Physics",
             "Topic :: Scientific/Engineering :: Astronomy"
         ],
-        cmdclass={'install': _install},
+        #cmdclass={'install': _install},
         include_package_data=True,
         package_dir={
         #             'config': './config',

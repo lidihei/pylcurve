@@ -1,8 +1,9 @@
 import numpy as np
 import os
-from pylcurve.lightcurve import lcurve
+from pylcurve import lcurve
 import ctypes
-lib = ctypes.CDLL('../pylcurve/lib/libpylcurve.so')
+import time
+import matplotlib.pyplot as plt
 
 
 argurs = '''times, expose, ndiv, q_value, q_range, q_dstep, q_vary, q_defined, iangle_value, 
@@ -41,9 +42,17 @@ times = np.array([0,1], dtype=np.float)
 expose = np.array([0,0], dtype=np.float)
 ndiv = np.array([0,0], dtype=np.float)
 
+tt = time.time()
+
+times = np.array([0,1], dtype=np.float)
+expose = np.array([2,2], dtype=np.float)/24/3600
+ndiv = np.array([1,1], dtype=np.float)
+data = np.loadtxt('example_data_file')
+times = data[:, 0]
+expose = data[:, 1]
 
 llcurve = lcurve()
-llcurve.lc(times, expose=expose, ndiv=ndiv,
+calc = llcurve.lc(times, expose=expose, ndiv=7,
        ###Binary and stars
        q_value = 0.9670,  q_range = 0.,  q_dstep = 0.,  q_vary = False,  q_defined = True,
        iangle_value = 86.5063,  iangle_range = 0.,  iangle_dstep = 0.,  iangle_vary = False,  iangle_defined = True,
@@ -119,3 +128,7 @@ llcurve.lc(times, expose=expose, ndiv=ndiv,
           )
 
 
+print('calculated time', time.time()- tt)
+fig, ax = plt.subplots(1,1,figsize=(8.5, 4))
+plt.plot(times, llcurve.calc)
+plt.show()

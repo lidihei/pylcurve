@@ -1,6 +1,7 @@
 import numpy as np
 from ctypes import *
 import os, sys
+#import time
 
 libdir = os.path.abspath(__file__)
 libdir = os.path.join(os.path.dirname(libdir), 'lib')
@@ -90,6 +91,9 @@ class lcurve:
        info = False
        ):
         '''
+        Calculate the light curve, the default values of the parameters are given by the example_modle_file of Thomas Marsh's cpp-lcurve,
+        the file can be found in the webhttps://github.com/trmrsh/cpp-lcurve/tree/master/doc
+        the explainations of the model can also be found from https://github.com/lidihei/pylcurve/doc/html/lroche.html
         q_value = 0.12,  q_range = 0.01,  q_dstep = 0.0001,  q_vary = False,  q_defined = True,
         iangle_value = 82,  iangle_range = 2,  iangle_dstep = 0.01,  iangle_vary = True,  iangle_defined = True,
         r1_value = 0.17,  r1_range = 0.05,  r1_dstep = 0.001,  r1_vary = True,  r1_defined = True,
@@ -108,12 +112,13 @@ class lcurve:
         expose [float array 1D] --- The exposure length in the same units as the time
         ndiv [int or int array 1D] --- Factor to split up data points to allow for finite exposures
              Note: Time, expose,and ndiv arraies must have the same size
+        ########## the parameters of MODLE
         !!!!Binary and stars!!!------------------
         q	---	Mass ratio, q = M2/M1
         iangle	---	Inclination angle, degrees
         r1	---	Radius of star 1, scaled by the binary separation
         r2	---	Radius of star 2, scaled by the binary separation. The radius is measured along the line of centres towards star 1. Set = -1 and hold fixed for Roche lobe filling stars.
-        cphi3	---	Third contact phase (star 1 starting to emerge from eclipse). This is an alternative way to specify the radii, based on a spherical approximation fot the two stars, i.e. unless the stars are spherical, it is not quite the true third contact. The radii will be computed from the contact phases according to the two equations r2+r1 = sqrt(1 - sin^2 i cos^2 (2*pi*cphi4)) and r2-r1 = sqrt(1 - sin^2 i cos^2 (2*pi*cphi3)). The radii returned are precise, just the interpretation as contact phases that is not precise. cphi3 and cphi4 need the boolean use_radii set to 0 to enabled. The reason for using them is to help with MCMC iterations as they prevent the nasty curved correlation between r1, r2 and i. This can save a huge amount of CPU time.
+        cphi3	---	Third contact phase (star 1 starting to emerge from eclipse). This is an alternative way to specify the radii, based on a spherical approximation for the two stars, i.e. unless the stars are spherical, it is not quite the true third contact. The radii will be computed from the contact phases according to the two equations r2+r1 = sqrt(1 - sin^2 i cos^2 (2*pi*cphi4)) and r2-r1 = sqrt(1 - sin^2 i cos^2 (2*pi*cphi3)). The radii returned are precise, just the interpretation as contact phases that is not precise. cphi3 and cphi4 need the boolean use_radii set to 0 to enabled. The reason for using them is to help with MCMC iterations as they prevent the nasty curved correlation between r1, r2 and i. This can save a huge amount of CPU time.
         cphi4	---	Fourth contact phase, star 1 fully emerged from eclipse. See cphi3 for details.
         spin1	---	This is the ratio of the spin frequency of star 1 to the orbital frequency. In this case a modified form of the Roche potential is used for star 1
         spin2	---	This is the ratio of the spin frequency of star 2 to the orbital frequency. In this case a modified form of the Roche potential is used for star 2
@@ -199,6 +204,7 @@ class lcurve:
         returns:
         ----------------------------------------------------------------------------------------------------------------------------------------------------
         '''
+        #tt = time.time()
         Tsize = len(times)
         ####--------------inintalize time and light curves arrays-----------------------------------------
         times = np.array(times, dtype=np.float)
@@ -301,6 +307,7 @@ class lcurve:
         wdwarflogrv = np.zeros(4, dtype=np.float)
         wdwarflogrv = wdwarflogrv.ctypes.data_as(POINTER(c_double*5))
 
+        #### compute light curve
         libpylcurve=self.libpylcurve
         libpylcurve.pylcurve(
                   times, expose, ndiv, Tsize,
@@ -378,14 +385,30 @@ class lcurve:
                   tperiod, gdark_bolom1, gdark_bolom2, mucrit1, mucrit2,
                   pslimb1, pslimb2, mirror, add_disc, opaque, add_spot, nspot, iscale, info
                             )
-        self.libpylcurve  = libpylcurve
-        print('ok')
+        #tt1 = time.time()
+        #print(f'cc computed time = {tt1-tt}')
+        self.calc = np.array(calc.contents)
+        self.lcstar1 = np.array(lcstar1.contents)
+        self.lcstar2 = np.array(lcstar2.contents)
+        self.lcdisc = np.array(lcdisc.contents)
+        self.lcedge = np.array(lcedge.contents)
+        self.lcspot = np.array(lcspot.contents)
+        wdwarflogrv = np.array(wdwarflogrv.contents)
+        self.wdwarf = wdwarflogrv[0]
+        self.logg1 = wdwarflogrv[1]
+        self.logg2 = wdwarflogrv[2]
+        self.rv1 = wdwarflogrv[3]
+        self.rv2 = wdwarflogrv[4]
+        #tt1 = time.time()
+        #print(f'cc ctypes time = {tt1-tt}')
+        return calc
 
     def lc_from_smodel(self, smodel, times, expose=0, ndiv=1, info=True):
         '''
         parameters:
         -----------------------------------------------------------------------
-        smodel [str] --- the name of modle file
+        smodel [str] --- the name of modle file, the explaination of the arguments can be found from founction of srcs/cpp-lcurve/src/lroche.cc 
+                         or from https://github.com/lidihei/pylcurve/doc/html/lroche.html
         times [float array 1D] --- it must be 1D np.array
         expose [float array 1D] --- The exposure length in the same units as the time
         ndiv [int or int array 1D] --- Factor to split up data points to allow for finite exposures
@@ -405,6 +428,7 @@ class lcurve:
         rv1: [float] --- volume-averaged radius of star1
         rv2: [float] --- volume-averaged radius of star2
         '''
+        #tt = time.time() #lijiao
         Tsize = len(times)
         ####--------------inintalize time and light curves arrays-----------------------------------------
         times = np.array(times, dtype=np.float)
@@ -439,6 +463,8 @@ class lcurve:
                       info,
                       calc, lcstar1, lcdisc,
                       lcedge, lcspot, lcstar2, wdwarflogrv)
+        #tt1 = time.time()#lijiao
+        #print(f'cc computed time = {tt1-tt}')#lijiao
         self.calc = np.array(calc.contents)
         self.lcstar1 = np.array(lcstar1.contents)
         self.lcstar2 = np.array(lcstar2.contents)
@@ -451,5 +477,6 @@ class lcurve:
         self.logg2 = wdwarflogrv[2]
         self.rv1 = wdwarflogrv[3]
         self.rv2 = wdwarflogrv[4]
-        print('ok')
-        print('wdwarf')
+        #tt1 = time.time() #lijiao
+        #print(f'cc ctypes time = {tt1-tt}') #lijiao
+        return calc
