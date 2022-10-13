@@ -4,7 +4,7 @@ This a python wrapper for lcurve written by Thomas Marsh
 
 'lcurve' is for modelling of light curves.
 
-Installation order: subs --> colly, binary --> roche --> lcurve  (https://github.com/trmrsh/cpp-lcurve)
+Installation order: subs --> colly, binary --> roche --> lcurve  (details see https://github.com/trmrsh/cpp-lcurve)
 
 
 The package of cpp-subs is based on pcre, pgplot, and slalib(C version)
