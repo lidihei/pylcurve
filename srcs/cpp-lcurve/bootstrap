@@ -6,6 +6,6 @@
 
 autoreconf -f -i -s
 
-./configure --prefix=$TRM_SOFTWARE/local
+./configure --prefix=$TRM_SOFTWARE
 make install
 make

@@ -16,7 +16,25 @@ lines += [f"LDFLAGS = {os.environ['LDFLAGS']}\n"]
 
 #### install class
 class _install(install):
-    
+
+    def set_environ(self):
+        _continue = True
+        try:
+           os.environ['TRM_SOFTWARE']
+           print('The TRM_SOFTWARE environment is existed')
+        except:
+            print('The TRM_SOFTWARE environment is not existed. \n Do you want set TRM_SOFTWARE environment same as the CONDA_PREFIX: [y/n]')
+            sss = input()
+            if sss.lower() == '' or sss.lower() == 'y':
+                print('The TRM_SOFTWARE environment will be set the same as CONDA_PREFIX')
+                print(f"CONDA_PREFIX={os.environ['CONDA_PREFIX']}\n")
+                os.system(f"export TRM_SOFTWARE={os.environ['CONDA_PREFIX']}")
+                print(f"TRM_SOFTWARE={os.environ['CONDA_PREFIX']}\n\n\n")
+            else:
+                print('you should set TRM_SOFTWARE environment by yourself, firstly.')
+                _continue = False
+        return _continue
+
     def install_cpp_code(self, dir_cppcode, dir_current=dir_current):
         ''' install the cpp code of lcurves e.g. cpp-lcurve'''
         print(f'change working directory to: {dir_cppcode} \n\n')
@@ -44,18 +62,11 @@ class _install(install):
         print(f'#-------------------------end make {dir_cppcode} lib--------------------------\n\n\n')
  
     def run(self):
-        self.install_cpp_code('cpp-lcurve')
-        self.lib_cpp_code('cpp-lcurve')
-        install.run(self)
+        _continue = self.set_environ()
+        if _continue: self.install_cpp_code('cpp-lcurve')
+        if _continue: self.lib_cpp_code('cpp-lcurve')
+        if _continue: install.run(self)
 
-def install_cpp_code(install, dir_cppcode):
-    ''' install the cpp code of lcurves e.g. cpp-lcurve
-    '''
-    print(install)
-    if install == 'install':
-       os.chdir(dir_cppcode)
-       os.system('./bootstrap')
-       os.chdir(dir_current)
 
 ######--------------------install cpp-lcurve-------------------------------
 #dir_cpplcurve = os.path.join(dir_current, 'srcs', 'cpp-lcurve')
