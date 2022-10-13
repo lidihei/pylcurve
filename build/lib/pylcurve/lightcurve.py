@@ -91,6 +91,9 @@ class lcurve:
        info = False
        ):
         '''
+        Calculate the light curve, the default values of the parameters are given by the example_modle_file of Thomas Marsh's cpp-lcurve,
+        the file can be found in the webhttps://github.com/trmrsh/cpp-lcurve/tree/master/doc
+        the explainations of the model can also be found from https://github.com/lidihei/pylcurve/doc/html/lroche.html
         q_value = 0.12,  q_range = 0.01,  q_dstep = 0.0001,  q_vary = False,  q_defined = True,
         iangle_value = 82,  iangle_range = 2,  iangle_dstep = 0.01,  iangle_vary = True,  iangle_defined = True,
         r1_value = 0.17,  r1_range = 0.05,  r1_dstep = 0.001,  r1_vary = True,  r1_defined = True,
@@ -109,6 +112,7 @@ class lcurve:
         expose [float array 1D] --- The exposure length in the same units as the time
         ndiv [int or int array 1D] --- Factor to split up data points to allow for finite exposures
              Note: Time, expose,and ndiv arraies must have the same size
+        ########## the parameters of MODLE
         !!!!Binary and stars!!!------------------
         q	---	Mass ratio, q = M2/M1
         iangle	---	Inclination angle, degrees
@@ -403,7 +407,8 @@ class lcurve:
         '''
         parameters:
         -----------------------------------------------------------------------
-        smodel [str] --- the name of modle file, the explaination of the arguments can be found from founction of lcurve.lc or (cpp-lcurve/doc/html/lroche.html)
+        smodel [str] --- the name of modle file, the explaination of the arguments can be found from founction of srcs/cpp-lcurve/src/lroche.cc 
+                         or from https://github.com/lidihei/pylcurve/doc/html/lroche.html
         times [float array 1D] --- it must be 1D np.array
         expose [float array 1D] --- The exposure length in the same units as the time
         ndiv [int or int array 1D] --- Factor to split up data points to allow for finite exposures

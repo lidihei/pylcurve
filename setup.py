@@ -12,13 +12,7 @@ dir_current = os.path.dirname(os.path.abspath(__file__))
 lines = [f"CPPFLAGS = -I./cpp-lcurve/include {os.environ['CPPFLAGS']}\n"]
 lines += [f"LDFLAGS = {os.environ['LDFLAGS']}\n"]
 
-f = open('Makefile_pylcurve', 'r')
-lines += f.readlines()
-f.close()
 
-f = open('Makefile', 'w')
-f.writelines(lines)
-f.close()
 
 #### install class
 class _install(install):
@@ -39,16 +33,18 @@ class _install(install):
         ''' produce the dynamice libarary of lcurves
         '''
         print(f'#-------------------------start make {dir_cppcode} lib------------------------\n\n')
-        dircode = os.path.join(dir_current, 'srcs', dir_cppcode, 'src')
-        libs = os.path.join(dir_current, 'srcs', dir_cppcode, 'src', '.libs', '*.so')
+        #dircode = os.path.join(dir_current, 'srcs', dir_cppcode, 'src')
+        #libs = os.path.join(dir_current, 'srcs', dir_cppcode, 'src', '.libs', '*.so')
+        libs = os.path.join('$TRM_SOFTWARE', 'lib', 'libpylcurve.so')
         libpy = os.path.join(dir_current, 'pylcurve', 'lib')
-        subprocess.call(['make',  '-C', dircode])
+        #subprocess.call(['make',  '-C', dircode])
+        #os.system(f'cp {libs} {libpy}')
         os.system(f'cp {libs} {libpy}')
-        subprocess.call(['make', 'clean', '-C', dircode])
+        #subprocess.call(['make', 'clean', '-C', dircode])
         print(f'#-------------------------end make {dir_cppcode} lib--------------------------\n\n\n')
  
     def run(self):
-        #self.install_cpp_code('cpp-lcurve')
+        self.install_cpp_code('cpp-lcurve')
         self.lib_cpp_code('cpp-lcurve')
         install.run(self)
 
@@ -103,7 +99,7 @@ setup(
             "Topic :: Scientific/Engineering :: Physics",
             "Topic :: Scientific/Engineering :: Astronomy"
         ],
-        #cmdclass={'install': _install},
+        cmdclass={'install': _install},
         include_package_data=True,
         package_dir={
         #             'config': './config',

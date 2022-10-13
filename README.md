@@ -29,8 +29,15 @@ $ cd srcs/cpp-binary & ./bootstrap
 - install roche
 $ cd srcs/cpp-roche & ./bootstrap
 
-- install lcurve
-$ cd srcs/cpp-lcurve & ./bootstrap
 
 - install pylcurve
 $ python setup.py install
+
+
+uninstall:
+- cd srcs/cpp-colly & make uninstall
+- cd srcs/cpp-binary & make uninstall
+- cd srcs/cpp-roche & make uninstall
+- cd srcs/cpp-lcurve & make uninstall
+- pip unistall pylcurve
+

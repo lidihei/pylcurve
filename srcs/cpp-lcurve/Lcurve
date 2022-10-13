@@ -14,7 +14,7 @@ alias simplex   /share/data/lijiao/TRM_SOFTWARE/local/bin/lcurve/simplex
 alias visualise /share/data/lijiao/TRM_SOFTWARE/local/bin/lcurve/visualise
  
 echo " "
-echo "Welcome to lcurve version 1.3, built 2022年 10月 12日 星期三 22:17:10 CST"
+echo "Welcome to lcurve version 1.3, built 2022年 10月 13日 星期四 12:34:06 CST"
 echo " "
 echo "Commands available are: lprofile, levmarq, lroche, lroches, picture, simplex and visualise"
 echo " "
