@@ -1,5 +1,5 @@
 # pylcurve
-This a python wrapper for lcurve written by Thomas Marsh
+This is a python wrapper of lcurve written by Thomas Marsh
 
 
 'lcurve' is for modelling of light curves.
