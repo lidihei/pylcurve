@@ -13,7 +13,7 @@ The package of cpp-subs is based on pcre, pgplot, and slalib(C version)
 # installation:
 
 - install pre
-- - $conda install -c anaconda pcre
+-- $conda install -c anaconda pcre
 
 if you install the pcre by using conda, then you should modified environment file of the include and lib
 
@@ -73,6 +73,7 @@ https://cygnus.astro.warwick.ac.uk/phsaap/software
 
 
 # uninstall:
+- $ cd cpp-subs & make uninstall
 - $ cd cpp-colly & make uninstall
 - $ cd cpp-binary & make uninstall
 - $ cd cpp-roche & make uninstall
