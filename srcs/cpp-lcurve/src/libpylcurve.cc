@@ -488,12 +488,14 @@ extern "C"{
             wdwarflogrv[2] = logg2;
             wdwarflogrv[3] = rv1;
             wdwarflogrv[4] = rv2;
-            std::cout << "White dwarf's contribution = " << wdwarf
-                      << std::endl;
-            std::cout << "log10(g1 [cgs]) = " << logg1 << std::endl;
-            std::cout << "log10(g2 [cgs]) = " << logg2 << std::endl;
-            std::cout << "Vol-averaged r1 = " << rv1 << std::endl;
-            std::cout << "Vol-averaged r2 = " << rv2 << std::endl;
+            if(info){
+                std::cout << "White dwarf's contribution = " << wdwarf
+                          << std::endl;
+                std::cout << "log10(g1 [cgs]) = " << logg1 << std::endl;
+                std::cout << "log10(g2 [cgs]) = " << logg2 << std::endl;
+                std::cout << "Vol-averaged r1 = " << rv1 << std::endl;
+                std::cout << "Vol-averaged r2 = " << rv2 << std::endl;
+                }
     
         } //try
         catch(const Roche::Roche_Error& err){
@@ -537,12 +539,14 @@ extern "C"{
             wdwarflogrv[2] = logg2;
             wdwarflogrv[3] = rv1;
             wdwarflogrv[4] = rv2;
-            std::cout << "White dwarf's contribution = " << wdwarf
-                      << std::endl;
-            std::cout << "log10(g1 [cgs]) = " << logg1 << std::endl;
-            std::cout << "log10(g2 [cgs]) = " << logg2 << std::endl;
-            std::cout << "Vol-averaged r1 = " << rv1 << std::endl;
-            std::cout << "Vol-averaged r2 = " << rv2 << std::endl;
+            if(info){
+                std::cout << "White dwarf's contribution = " << wdwarf
+                          << std::endl;
+                std::cout << "log10(g1 [cgs]) = " << logg1 << std::endl;
+                std::cout << "log10(g2 [cgs]) = " << logg2 << std::endl;
+                std::cout << "Vol-averaged r1 = " << rv1 << std::endl;
+                std::cout << "Vol-averaged r2 = " << rv2 << std::endl;
+                }
     
         } //try
         catch(const Roche::Roche_Error& err){
