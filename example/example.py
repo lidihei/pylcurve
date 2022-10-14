@@ -74,7 +74,7 @@ calc = llcurve.lc(times, expose=expose, ndiv=7,
        ldc2_4_value = -0.2518,  ldc2_4_range = 0.,  ldc2_4_dstep = 0.,  ldc2_4_vary = False,  ldc2_4_defined = True,
        velocity_scale_value = 323.4547,  velocity_scale_range = 1.,  velocity_scale_dstep = 1.,  velocity_scale_vary = True,  velocity_scale_defined = True,
        beam_factor1_value = 2.,  beam_factor1_range = 0.1,  beam_factor1_dstep = 0.02,  beam_factor1_vary = False,  beam_factor1_defined = True,
-       beam_factor2_value = 1.3131,  beam_factor2_range = 0.,  beam_factor2_dstep = 0.,  beam_factor2_vary = True,  beam_factor2_defined = True,
+       beam_factor2_value = 1.3131,  beam_factor2_range = 0.,  beam_factor2_dstep = 0.,  beam_factor2_vary = False,  beam_factor2_defined = True,
        ##//General
        t0_value = 1.2012e-5,  t0_range = 0.,  t0_dstep = 0.,  t0_vary = False,  t0_defined = True,
        period_value = 1.,  period_range = 0.,  period_dstep = 0.,  period_vary = False,  period_defined = True,
@@ -124,7 +124,7 @@ calc = llcurve.lc(times, expose=expose, ndiv=7,
        roche1 = False,  roche2 = True,  eclipse1 = True,  eclipse2 = True,  glens1 = True,  use_radii=1.,
        tperiod = 0.40373,  gdark_bolom1 = 0.,  gdark_bolom2 = 0.,  mucrit1 = 0.,  mucrit2 = 0.,
        slimb1 = 'Claret', slimb2 = 'Claret',  mirror = False,  add_disc = False,  opaque = False,  add_spot = False,  nspot = 100,  iscale = False,
-       info = True 
+       info = True, parallel_threshold =4
           )
 
 
