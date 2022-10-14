@@ -485,7 +485,7 @@ class lcurve:
         self.rv2 = wdwarflogrv[4]
         #tt1 = time.time()
         #print(f'cc ctypes time = {tt1-tt}')
-        return calc
+        return self.calc
 
     def lc_from_smodel(self, smodel, times, expose=0, ndiv=1, info=True):
         '''
@@ -563,4 +563,4 @@ class lcurve:
         self.rv2 = wdwarflogrv[4]
         #tt1 = time.time() #lijiao
         #print(f'cc ctypes time = {tt1-tt}') #lijiao
-        return calc
+        return self.calc
