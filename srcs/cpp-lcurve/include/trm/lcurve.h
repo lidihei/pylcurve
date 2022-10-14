@@ -900,7 +900,7 @@ namespace Lcurve {
                               double *calc, double *lcstar1, double *lcdisc,
                               double *lcedge, double *lcspot, double *lcstar2,
                               double& wdwarf,
-                              double& logg1, double& logg2, double& rv1, double& rv2);
+                              double& logg1, double& logg2, double& rv1, double& rv2, int parallel_threshold);
 
   //! Re-scales a fit to minimise chi**2
   double re_scale(const Lcurve::Data& data, Subs::Array1D<double>& fit,

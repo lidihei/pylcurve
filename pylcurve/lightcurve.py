@@ -88,7 +88,7 @@ class lcurve:
        roche1 = False,  roche2 = True,  eclipse1 = True,  eclipse2 = True,  glens1 = True,  use_radii=1.,
        tperiod = 0.40373,  gdark_bolom1 = 0.,  gdark_bolom2 = 0.,  mucrit1 = 0.,  mucrit2 = 0.,
        slimb1 = 'Claret', slimb2 = 'Claret',  mirror = False,  add_disc = False,  opaque = False,  add_spot = False,  nspot = 100,  iscale = False,
-       info = True 
+       info = True, parallel_threshold=4
        ):
         '''
         Calculate the light curve, the default values of the parameters are given by the example_modle_file of Thomas Marsh's cpp-lcurve, the file can be found from https://github.com/trmrsh/cpp-lcurve/tree/master/doc.
@@ -273,6 +273,8 @@ class lcurve:
 
         info [bool] --- if true, it prints out array sizes to stderr
 
+        parallel_threshold [int] --- if Tsize > parallel_threshold use omp parallel
+
         returns:
         ----------------------------------------------------------------------------------------------------------------------------------------------------
         calc [array]  --- the calculated light curve
@@ -390,6 +392,7 @@ class lcurve:
         pslimb2 = c_char_p(slimb2.encode())
         wdwarflogrv = np.zeros(4, dtype=np.float)
         wdwarflogrv = wdwarflogrv.ctypes.data_as(POINTER(c_double*5))
+        parallel_threshold = c_int(parallel_threshold)
 
         #### compute light curve
         libpylcurve=self.libpylcurve
@@ -467,7 +470,7 @@ class lcurve:
                   nlatfill, nlngfill, lfudge, llo, lhi, phase1, phase2, nrad, wavelength,
                   roche1, roche2, eclipse1, eclipse2, glens1, use_radii,
                   tperiod, gdark_bolom1, gdark_bolom2, mucrit1, mucrit2,
-                  pslimb1, pslimb2, mirror, add_disc, opaque, add_spot, nspot, iscale, info
+                  pslimb1, pslimb2, mirror, add_disc, opaque, add_spot, nspot, iscale, info, parallel_threshold
                             )
         #tt1 = time.time()
         #print(f'cc computed time = {tt1-tt}')
@@ -487,7 +490,7 @@ class lcurve:
         #print(f'cc ctypes time = {tt1-tt}')
         return self.calc
 
-    def lc_from_smodel(self, smodel, times, expose=0, ndiv=1, info=True):
+    def lc_from_smodel(self, smodel, times, expose=0, ndiv=1, info=True, parallel_threshold=4):
         '''
         parameters:
         -----------------------------------------------------------------------
@@ -497,6 +500,7 @@ class lcurve:
         expose [float array 1D] --- The exposure length in the same units as the time
         ndiv [int or int array 1D] --- Factor to split up data points to allow for finite exposures
         info [bool] --- if true, it prints out array sizes to stderr
+        parallel_threshold [int] --- if Tsize > parallel_threshold use omp parallel
         returns:
         -----------------------------------------------------------------------
         calc [array]  --- the calculated light curve
@@ -541,12 +545,13 @@ class lcurve:
         wdwarflogrv = np.zeros(4, dtype=np.float)
         wdwarflogrv = wdwarflogrv.ctypes.data_as(POINTER(c_double*5))
         info = c_bool(info)
+        parallel_threshold = c_int(parallel_threshold)
         libpylcurve=self.libpylcurve
         libpylcurve.pylcurve_smodel(psmodel, 
                       times, expose, ndiv, Tsize,
                       info,
                       calc, lcstar1, lcdisc,
-                      lcedge, lcspot, lcstar2, wdwarflogrv)
+                      lcedge, lcspot, lcstar2, wdwarflogrv, parallel_threshold)
         #tt1 = time.time()#lijiao
         #print(f'cc computed time = {tt1-tt}')#lijiao
         self.calc = np.array(calc.contents)

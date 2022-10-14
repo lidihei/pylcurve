@@ -32,7 +32,7 @@ void Lcurve::pylight_curve_comp(const Lcurve::Model& mdl,
                               double *calc, double *lcstar1, double *lcdisc,
                               double *lcedge, double *lcspot, double *lcstar2,
                               double& wdwarf,
-                              double& logg1, double& logg2, double& rv1, double& rv2){
+                              double& logg1, double& logg2, double& rv1, double& rv2, int parallel_threshold){
 
   double r1, r2;
   mdl.get_r1r2(r1, r2);
@@ -223,7 +223,7 @@ void Lcurve::pylight_curve_comp(const Lcurve::Model& mdl,
 #ifdef _OPENMP
   int mxth = std::min(16, omp_get_max_threads());
   omp_set_num_threads(mxth);
-#pragma omp parallel for schedule(dynamic) if(Tsize > 4)
+#pragma omp parallel for schedule(dynamic) if(Tsize > parallel_threshold)
 #endif
 
   for(int np=0; np<Tsize; np++){

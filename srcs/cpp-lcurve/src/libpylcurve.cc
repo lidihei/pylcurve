@@ -398,7 +398,8 @@ extern "C"{
                   int nlatfill, int nlngfill, double lfudge, double llo, double lhi, double phase1, double phase2, int nrad, double wavelength,
                   bool roche1, bool roche2, bool eclipse1, bool eclipse2, bool glens1, bool use_radii,
                   double tperiod, double gdark_bolom1, double gdark_bolom2, double mucrit1, double mucrit2, 
-                  const char* pslimb1, const char* pslimb2, bool mirror, bool add_disc, bool opaque, bool add_spot, int nspot, bool iscale, bool info
+                  const char* pslimb1, const char* pslimb2, bool mirror, bool add_disc, bool opaque, bool add_spot, int nspot, bool iscale, bool info,
+                  int parallel_threshold
                    ){
         try{
             //added by lijiao  
@@ -481,7 +482,7 @@ extern "C"{
             double wdwarf, chisq, wnok, logg1, logg2, rv1, rv2;
             Lcurve::pylight_curve_comp(model, times, exposes, ndivs, Tsize, info, calc,
                                        lcstar1, lcdisc, lcedge, lcspot, lcstar2,
-                                       wdwarf, logg1, logg2, rv1, rv2);
+                                       wdwarf, logg1, logg2, rv1, rv2, parallel_threshold);
     
             wdwarflogrv[0] = wdwarf;
             wdwarflogrv[1] = logg1;
@@ -524,7 +525,7 @@ extern "C"{
                       bool info,
                       double *calc, double *lcstar1, double *lcdisc,
                       double *lcedge, double *lcspot, double *lcstar2,
-                      double *wdwarflogrv){
+                      double *wdwarflogrv, int parallel_threshold){
         try{
             const std::string smodel = psmodel;
             Lcurve::Model model(smodel);
@@ -533,7 +534,7 @@ extern "C"{
             double wdwarf, logg1, logg2, rv1, rv2;
             Lcurve::pylight_curve_comp(model, times, exposes, ndivs, Tsize, info, calc,
                                        lcstar1, lcdisc, lcedge, lcspot, lcstar2,
-                                       wdwarf, logg1, logg2, rv1, rv2);
+                                       wdwarf, logg1, logg2, rv1, rv2, parallel_threshold);
             wdwarflogrv[0] = wdwarf;
             wdwarflogrv[1] = logg1;
             wdwarflogrv[2] = logg2;
