@@ -24,13 +24,16 @@ The package of cpp-subs is based on pcre, pgplot, and slalib(C version)
 - install pre
 - - $conda install -c anaconda pcre
 
+- install pglog
+- - $conda install -c conda-forge pgplot
+
 if you install the pcre by using conda, then you should modified environment file of the include and lib
 
 
 - set environment variables (e.g. write them into \~/.bashrc)
 - - export TRM_SOFTWARE= the_prefix_directory 
-- - export CPPFLAGS="-I$CONDA_PREFIX/include/ -I$TRM_SOFTWARE/local/include"
-- - export LDFLAGS="-L$CONDA_PREFIX/lib -L$TRM_SOFTWARE/local/lib"
+- - export CPPFLAGS="-I$CONDA_PREFIX/include/ -I$TRM_SOFTWARE/include"
+- - export LDFLAGS="-L$CONDA_PREFIX/lib -L$TRM_SOFTWARE/lib"
 - - export CFLAGS="-I$CONDA_PREFIX/include/"
 
 - install slalib (C version)
@@ -39,8 +42,8 @@ if you install the pcre by using conda, then you should modified environment fil
 - - $ cd sla-1.0.5
 - - $ autoreconf -f -i -s
 - - $ ./configure --prefix=$CONDA_PREFIX
-- - $ make install
 - - $ make
+- - $ make install
 
 The file called 'Lcurve' that is generated in this directory defines
 aliases (csh-style) and prints a help message when sourced.
@@ -52,8 +55,8 @@ https://cygnus.astro.warwick.ac.uk/phsaap/software
 - - $ cd cpp-subs
 - - $ autoreconf -f -i -s
 - - $ ./configure --prefix=$TRM_SOFTWARE
-- - $ make install
 - - $ make
+- - $ make install
 
 - 2nd, install colly (can be download from [cpp-colly](https://github.com/trmrsh/cpp-colly))
 - - $ cd cpp-colly
@@ -66,15 +69,15 @@ https://cygnus.astro.warwick.ac.uk/phsaap/software
 - - $ cd cpp-binary
 - - $ autoreconf -f -i -s
 - - $ ./configure --prefix=$TRM_SOFTWARE
-- - $ make install
 - - $ make
+- - $ make install
 
 - 4th, install roche (can be download from [cpp-roche](https://github.com/trmrsh/cpp-roche))
 - - $ cd cpp-roche
 - - $ autoreconf -f -i -s
 - - $ ./configure --prefix=$TRM_SOFTWARE
-- - $ make install
 - - $ make
+- - $ make install
 
 
 - 5th install [pylcurve](https://github.com/lidihei/pylcurve)
