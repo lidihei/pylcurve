@@ -35,18 +35,28 @@ class _install(install):
                 _continue = False
         return _continue
 
+    
     def install_cpp_code(self, dir_cppcode, dir_current=dir_current):
         ''' install the cpp code of lcurves e.g. cpp-lcurve'''
         print(f'change working directory to: {dir_cppcode} \n\n')
         dir_cppcode = os.path.join(dir_current, 'srcs',  dir_cppcode)
         os.chdir(dir_cppcode)
         print(f'------------------------start install {dir_cppcode} ------------------------')
-        os.system('./bootstrap')
+        os.system('./pyinstall')
         subprocess.call(['make', 'clean', '-C', '.'])
         print(f'change working directory to: {dir_current} \n\n')
         os.chdir(dir_current)
         print(f'------------------------end install {dir_cppcode}---------------------------\n\n')
 
+    def download_code(self, dir_current=dir_current, url = 'https://github.com/lidihei/cpp-lcurve.git'):
+        dir_cppcode = os.path.join(dir_current, 'srcs')
+        print(f'-------------------download: {dir_cppcode}---------------------------------\n\n')
+        os.chdir(dir_cppcode)
+        os.system(f'git clone {url}')
+        os.chdir(dir_current)
+        
+        
+        
     def lib_cpp_code(self, dir_cppcode, dir_current=dir_current):
         ''' produce the dynamice libarary of lcurves
         '''
@@ -63,6 +73,7 @@ class _install(install):
  
     def run(self):
         _continue = self.set_environ()
+        if _continue: self.download_code()
         if _continue: self.install_cpp_code('cpp-lcurve')
         if _continue: self.lib_cpp_code('cpp-lcurve')
         if _continue: install.run(self)
