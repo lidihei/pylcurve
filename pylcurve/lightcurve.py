@@ -13,7 +13,7 @@ class lcurve:
         '''
         load libpylcurve
         '''
-        libpylcurve=CDLL(f"{libdir}/{lib}")
+        libpylcurve=CDLL(os.path.join(libdir, lib))
         self.libpylcurve = libpylcurve
 
     def lc(self, times, expose=0, ndiv=1,
@@ -310,11 +310,11 @@ class lcurve:
         #tt = time.time()
         Tsize = len(times)
         ####--------------inintalize time and light curves arrays-----------------------------------------
-        times = np.array(times, dtype=np.float)
+        times = np.array(times, dtype=np.float64)
         if isinstance(expose, float):
-            expose = expose*np.ones(Tsize, dtype=np.float)
+            expose = expose*np.ones(Tsize, dtype=np.float64)
         else:
-            expose = np.array(expose, dtype=np.float)
+            expose = np.array(expose, dtype=np.float64)
 
         if isinstance(ndiv, int):
             ndiv = ndiv*np.ones(Tsize, dtype=np.int32)
@@ -485,10 +485,10 @@ class lcurve:
                   stsp21_lat_value, stsp21_lat_range, stsp21_lat_dstep, stsp21_lat_vary, stsp21_lat_defined,
                   stsp21_fwhm_value, stsp21_fwhm_range, stsp21_fwhm_dstep, stsp21_fwhm_vary, stsp21_fwhm_defined,
                   stsp21_tcen_value, stsp21_tcen_range, stsp21_tcen_dstep, stsp21_tcen_vary, stsp21_tcen_defined,
-                  stsp21_long_value, stsp21_long_range, stsp21_long_dstep, stsp21_long_vary, stsp21_long_defined,
-                  stsp21_lat_value, stsp21_lat_range, stsp21_lat_dstep, stsp21_lat_vary, stsp21_lat_defined,
-                  stsp21_fwhm_value, stsp21_fwhm_range, stsp21_fwhm_dstep, stsp21_fwhm_vary, stsp21_fwhm_defined,
-                  stsp21_tcen_value, stsp21_tcen_range, stsp21_tcen_dstep, stsp21_tcen_vary, stsp21_tcen_defined,
+                  stsp22_long_value, stsp22_long_range, stsp22_long_dstep, stsp22_long_vary, stsp22_long_defined,
+                  stsp22_lat_value, stsp22_lat_range, stsp22_lat_dstep, stsp22_lat_vary, stsp22_lat_defined,
+                  stsp22_fwhm_value, stsp22_fwhm_range, stsp22_fwhm_dstep, stsp22_fwhm_vary, stsp22_fwhm_defined,
+                  stsp22_tcen_value, stsp22_tcen_range, stsp22_tcen_dstep, stsp22_tcen_vary, stsp22_tcen_defined,
                   uesp_long1_value, uesp_long1_range, uesp_long1_dstep, uesp_long1_vary, uesp_long1_defined,
                   uesp_long2_value, uesp_long2_range, uesp_long2_dstep, uesp_long2_vary, uesp_long2_defined,
                   uesp_lathw_value, uesp_lathw_range, uesp_lathw_dstep, uesp_lathw_vary, uesp_lathw_defined,
