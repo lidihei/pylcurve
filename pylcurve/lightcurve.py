@@ -56,10 +56,27 @@ class lcurve:
        stsp11_lat_value = 0.,  stsp11_lat_range = 0.,  stsp11_lat_dstep = 0.,  stsp11_lat_vary = False,  stsp11_lat_defined = False,
        stsp11_fwhm_value = 0.,  stsp11_fwhm_range = 0.,  stsp11_fwhm_dstep = 0.,  stsp11_fwhm_vary = False,  stsp11_fwhm_defined = False,
        stsp11_tcen_value = 0.,  stsp11_tcen_range = 0.,  stsp11_tcen_dstep = 0.,  stsp11_tcen_vary = False,  stsp11_tcen_defined = False,
+       stsp12_long_value = 0.,  stsp12_long_range = 0.,  stsp12_long_dstep = 0.,  stsp12_long_vary = False,  stsp12_long_defined = False,
+       stsp12_lat_value = 0.,  stsp12_lat_range = 0.,  stsp12_lat_dstep = 0.,  stsp12_lat_vary = False,  stsp12_lat_defined = False,
+       stsp12_fwhm_value = 0.,  stsp12_fwhm_range = 0.,  stsp12_fwhm_dstep = 0.,  stsp12_fwhm_vary = False,  stsp12_fwhm_defined = False,
+       stsp12_tcen_value = 0.,  stsp12_tcen_range = 0.,  stsp12_tcen_dstep = 0.,  stsp12_tcen_vary = False,  stsp12_tcen_defined = False,
+       stsp13_long_value = 0.,  stsp13_long_range = 0.,  stsp13_long_dstep = 0.,  stsp13_long_vary = False,  stsp13_long_defined = False,
+       stsp13_lat_value = 0.,  stsp13_lat_range = 0.,  stsp13_lat_dstep = 0.,  stsp13_lat_vary = False,  stsp13_lat_defined = False,
+       stsp13_fwhm_value = 0.,  stsp13_fwhm_range = 0.,  stsp13_fwhm_dstep = 0.,  stsp13_fwhm_vary = False,  stsp13_fwhm_defined = False,
+       stsp13_tcen_value = 0.,  stsp13_tcen_range = 0.,  stsp13_tcen_dstep = 0.,  stsp13_tcen_vary = False,  stsp13_tcen_defined = False,
        stsp21_long_value = 0.,  stsp21_long_range = 0.,  stsp21_long_dstep = 0.,  stsp21_long_vary = False,  stsp21_long_defined = False,
        stsp21_lat_value = 0.,  stsp21_lat_range = 0.,  stsp21_lat_dstep = 0.,  stsp21_lat_vary = False,  stsp21_lat_defined = False,
        stsp21_fwhm_value = 0.,  stsp21_fwhm_range = 0.,  stsp21_fwhm_dstep = 0.,  stsp21_fwhm_vary = False,  stsp21_fwhm_defined = False,
        stsp21_tcen_value = 0.,  stsp21_tcen_range = 0.,  stsp21_tcen_dstep = 0.,  stsp21_tcen_vary = False,  stsp21_tcen_defined = False,
+       stsp22_long_value = 0.,  stsp22_long_range = 0.,  stsp22_long_dstep = 0.,  stsp22_long_vary = False,  stsp22_long_defined = False,
+       stsp22_lat_value = 0.,  stsp22_lat_range = 0.,  stsp22_lat_dstep = 0.,  stsp22_lat_vary = False,  stsp22_lat_defined = False,
+       stsp22_fwhm_value = 0.,  stsp22_fwhm_range = 0.,  stsp22_fwhm_dstep = 0.,  stsp22_fwhm_vary = False,  stsp22_fwhm_defined = False,
+       stsp22_tcen_value = 0.,  stsp22_tcen_range = 0.,  stsp22_tcen_dstep = 0.,  stsp22_tcen_vary = False,  stsp22_tcen_defined = False,
+       uesp_long1_value = 0.,  uesp_long1_range = 0.,  uesp_long1_dstep = 0.,  uesp_long1_vary = False,  uesp_long1_defined = True,
+       uesp_long2_value = 0.,  uesp_long2_range = 0.,  uesp_long2_dstep = 0.,  uesp_long2_vary = False,  uesp_long2_defined = True,
+       uesp_lathw_value = 0.,  uesp_lathw_range = 0.,  uesp_lathw_dstep = 0.,  uesp_lathw_vary = False,  uesp_lathw_defined = True,
+       uesp_taper_value = 0.,  uesp_taper_range = 0.,  uesp_taper_dstep = 0.,  uesp_taper_vary = False,  uesp_taper_defined = True,
+       uesp_temp_value = 0.,  uesp_temp_range = 0.,  uesp_temp_dstep = 0.,  uesp_temp_vary = False,  uesp_temp_defined = True,
        ##// disc
        rdisc1_value = 0.05,  rdisc1_range = 0.,  rdisc1_dstep = 0.,  rdisc1_vary = False,  rdisc1_defined = True,
        rdisc2_value = 0.35,  rdisc2_range = 0.,  rdisc2_dstep = 0.,  rdisc2_vary = False,  rdisc2_defined = True,
@@ -354,10 +371,27 @@ class lcurve:
         stsp11_lat_value, stsp11_lat_range, stsp11_lat_dstep, stsp11_lat_vary,  stsp11_lat_defined = c_double(stsp11_lat_value), c_double(stsp11_lat_range), c_double(stsp11_lat_dstep), c_bool(stsp11_lat_vary), c_bool(stsp11_lat_defined)
         stsp11_fwhm_value, stsp11_fwhm_range, stsp11_fwhm_dstep, stsp11_fwhm_vary,  stsp11_fwhm_defined = c_double(stsp11_fwhm_value), c_double(stsp11_fwhm_range), c_double(stsp11_fwhm_dstep), c_bool(stsp11_fwhm_vary), c_bool(stsp11_fwhm_defined)
         stsp11_tcen_value, stsp11_tcen_range, stsp11_tcen_dstep, stsp11_tcen_vary,  stsp11_tcen_defined = c_double(stsp11_tcen_value), c_double(stsp11_tcen_range), c_double(stsp11_tcen_dstep), c_bool(stsp11_tcen_vary), c_bool(stsp11_tcen_defined)
+        stsp12_long_value, stsp12_long_range, stsp12_long_dstep, stsp12_long_vary,  stsp12_long_defined = c_double(stsp12_long_value), c_double(stsp12_long_range), c_double(stsp12_long_dstep), c_bool(stsp12_long_vary), c_bool(stsp12_long_defined)
+        stsp12_lat_value, stsp12_lat_range, stsp12_lat_dstep, stsp12_lat_vary,  stsp12_lat_defined = c_double(stsp12_lat_value), c_double(stsp12_lat_range), c_double(stsp12_lat_dstep), c_bool(stsp12_lat_vary), c_bool(stsp12_lat_defined)
+        stsp12_fwhm_value, stsp12_fwhm_range, stsp12_fwhm_dstep, stsp12_fwhm_vary,  stsp12_fwhm_defined = c_double(stsp12_fwhm_value), c_double(stsp12_fwhm_range), c_double(stsp12_fwhm_dstep), c_bool(stsp12_fwhm_vary), c_bool(stsp12_fwhm_defined)
+        stsp12_tcen_value, stsp12_tcen_range, stsp12_tcen_dstep, stsp12_tcen_vary,  stsp12_tcen_defined = c_double(stsp12_tcen_value), c_double(stsp12_tcen_range), c_double(stsp12_tcen_dstep), c_bool(stsp12_tcen_vary), c_bool(stsp12_tcen_defined)
+        stsp13_long_value, stsp13_long_range, stsp13_long_dstep, stsp13_long_vary,  stsp13_long_defined = c_double(stsp13_long_value), c_double(stsp13_long_range), c_double(stsp13_long_dstep), c_bool(stsp13_long_vary), c_bool(stsp13_long_defined)
+        stsp13_lat_value, stsp13_lat_range, stsp13_lat_dstep, stsp13_lat_vary,  stsp13_lat_defined = c_double(stsp13_lat_value), c_double(stsp13_lat_range), c_double(stsp13_lat_dstep), c_bool(stsp13_lat_vary), c_bool(stsp13_lat_defined)
+        stsp13_fwhm_value, stsp13_fwhm_range, stsp13_fwhm_dstep, stsp13_fwhm_vary,  stsp13_fwhm_defined = c_double(stsp13_fwhm_value), c_double(stsp13_fwhm_range), c_double(stsp13_fwhm_dstep), c_bool(stsp13_fwhm_vary), c_bool(stsp13_fwhm_defined)
+        stsp13_tcen_value, stsp13_tcen_range, stsp13_tcen_dstep, stsp13_tcen_vary,  stsp13_tcen_defined = c_double(stsp13_tcen_value), c_double(stsp13_tcen_range), c_double(stsp13_tcen_dstep), c_bool(stsp13_tcen_vary), c_bool(stsp13_tcen_defined)
         stsp21_long_value, stsp21_long_range, stsp21_long_dstep, stsp21_long_vary,  stsp21_long_defined = c_double(stsp21_long_value), c_double(stsp21_long_range), c_double(stsp21_long_dstep), c_bool(stsp21_long_vary), c_bool(stsp21_long_defined)
         stsp21_lat_value, stsp21_lat_range, stsp21_lat_dstep, stsp21_lat_vary,  stsp21_lat_defined = c_double(stsp21_lat_value), c_double(stsp21_lat_range), c_double(stsp21_lat_dstep), c_bool(stsp21_lat_vary), c_bool(stsp21_lat_defined)
         stsp21_fwhm_value, stsp21_fwhm_range, stsp21_fwhm_dstep, stsp21_fwhm_vary,  stsp21_fwhm_defined = c_double(stsp21_fwhm_value), c_double(stsp21_fwhm_range), c_double(stsp21_fwhm_dstep), c_bool(stsp21_fwhm_vary), c_bool(stsp21_fwhm_defined)
         stsp21_tcen_value, stsp21_tcen_range, stsp21_tcen_dstep, stsp21_tcen_vary,  stsp21_tcen_defined = c_double(stsp21_tcen_value), c_double(stsp21_tcen_range), c_double(stsp21_tcen_dstep), c_bool(stsp21_tcen_vary), c_bool(stsp21_tcen_defined)
+        stsp22_long_value, stsp22_long_range, stsp22_long_dstep, stsp22_long_vary,  stsp22_long_defined = c_double(stsp22_long_value), c_double(stsp22_long_range), c_double(stsp22_long_dstep), c_bool(stsp22_long_vary), c_bool(stsp22_long_defined)
+        stsp22_lat_value, stsp22_lat_range, stsp22_lat_dstep, stsp22_lat_vary,  stsp22_lat_defined = c_double(stsp22_lat_value), c_double(stsp22_lat_range), c_double(stsp22_lat_dstep), c_bool(stsp22_lat_vary), c_bool(stsp22_lat_defined)
+        stsp22_fwhm_value, stsp22_fwhm_range, stsp22_fwhm_dstep, stsp22_fwhm_vary,  stsp22_fwhm_defined = c_double(stsp22_fwhm_value), c_double(stsp22_fwhm_range), c_double(stsp22_fwhm_dstep), c_bool(stsp22_fwhm_vary), c_bool(stsp22_fwhm_defined)
+        stsp22_tcen_value, stsp22_tcen_range, stsp22_tcen_dstep, stsp22_tcen_vary,  stsp22_tcen_defined = c_double(stsp22_tcen_value), c_double(stsp22_tcen_range), c_double(stsp22_tcen_dstep), c_bool(stsp22_tcen_vary), c_bool(stsp22_tcen_defined)
+        uesp_long1_value, uesp_long1_range, uesp_long1_dstep, uesp_long1_vary,  uesp_long1_defined = c_double(uesp_long1_value), c_double(uesp_long1_range), c_double(uesp_long1_dstep), c_bool(uesp_long1_vary), c_bool(uesp_long1_defined)
+        uesp_long2_value, uesp_long2_range, uesp_long2_dstep, uesp_long2_vary,  uesp_long2_defined = c_double(uesp_long2_value), c_double(uesp_long2_range), c_double(uesp_long2_dstep), c_bool(uesp_long2_vary), c_bool(uesp_long2_defined)
+        uesp_lathw_value, uesp_lathw_range, uesp_lathw_dstep, uesp_lathw_vary,  uesp_lathw_defined = c_double(uesp_lathw_value), c_double(uesp_lathw_range), c_double(uesp_lathw_dstep), c_bool(uesp_lathw_vary), c_bool(uesp_lathw_defined)
+        uesp_taper_value, uesp_taper_range, uesp_taper_dstep, uesp_taper_vary,  uesp_taper_defined = c_double(uesp_taper_value), c_double(uesp_taper_range), c_double(uesp_taper_dstep), c_bool(uesp_taper_vary), c_bool(uesp_taper_defined)
+        uesp_temp_value, uesp_temp_range, uesp_temp_dstep, uesp_temp_vary,  uesp_temp_defined = c_double(uesp_temp_value), c_double(uesp_temp_range), c_double(uesp_temp_dstep), c_bool(uesp_temp_vary), c_bool(uesp_temp_defined)
         #### disc
         rdisc1_value, rdisc1_range, rdisc1_dstep, rdisc1_vary,  rdisc1_defined = c_double(rdisc1_value), c_double(rdisc1_range), c_double(rdisc1_dstep), c_bool(rdisc1_vary), c_bool(rdisc1_defined)
         rdisc2_value, rdisc2_range, rdisc2_dstep, rdisc2_vary,  rdisc2_defined = c_double(rdisc2_value), c_double(rdisc2_range), c_double(rdisc2_dstep), c_bool(rdisc2_vary), c_bool(rdisc2_defined)
@@ -439,10 +473,27 @@ class lcurve:
                   stsp11_lat_value, stsp11_lat_range, stsp11_lat_dstep, stsp11_lat_vary, stsp11_lat_defined,
                   stsp11_fwhm_value, stsp11_fwhm_range, stsp11_fwhm_dstep, stsp11_fwhm_vary, stsp11_fwhm_defined,
                   stsp11_tcen_value, stsp11_tcen_range, stsp11_tcen_dstep, stsp11_tcen_vary, stsp11_tcen_defined,
+                  stsp12_long_value, stsp12_long_range, stsp12_long_dstep, stsp12_long_vary, stsp12_long_defined,
+                  stsp12_lat_value, stsp12_lat_range, stsp12_lat_dstep, stsp12_lat_vary, stsp12_lat_defined,
+                  stsp12_fwhm_value, stsp12_fwhm_range, stsp12_fwhm_dstep, stsp12_fwhm_vary, stsp12_fwhm_defined,
+                  stsp12_tcen_value, stsp12_tcen_range, stsp12_tcen_dstep, stsp12_tcen_vary, stsp12_tcen_defined,
+                  stsp13_long_value, stsp13_long_range, stsp13_long_dstep, stsp13_long_vary, stsp13_long_defined,
+                  stsp13_lat_value, stsp13_lat_range, stsp13_lat_dstep, stsp13_lat_vary, stsp13_lat_defined,
+                  stsp13_fwhm_value, stsp13_fwhm_range, stsp13_fwhm_dstep, stsp13_fwhm_vary, stsp13_fwhm_defined,
+                  stsp13_tcen_value, stsp13_tcen_range, stsp13_tcen_dstep, stsp13_tcen_vary, stsp13_tcen_defined,
                   stsp21_long_value, stsp21_long_range, stsp21_long_dstep, stsp21_long_vary, stsp21_long_defined,
                   stsp21_lat_value, stsp21_lat_range, stsp21_lat_dstep, stsp21_lat_vary, stsp21_lat_defined,
                   stsp21_fwhm_value, stsp21_fwhm_range, stsp21_fwhm_dstep, stsp21_fwhm_vary, stsp21_fwhm_defined,
                   stsp21_tcen_value, stsp21_tcen_range, stsp21_tcen_dstep, stsp21_tcen_vary, stsp21_tcen_defined,
+                  stsp21_long_value, stsp21_long_range, stsp21_long_dstep, stsp21_long_vary, stsp21_long_defined,
+                  stsp21_lat_value, stsp21_lat_range, stsp21_lat_dstep, stsp21_lat_vary, stsp21_lat_defined,
+                  stsp21_fwhm_value, stsp21_fwhm_range, stsp21_fwhm_dstep, stsp21_fwhm_vary, stsp21_fwhm_defined,
+                  stsp21_tcen_value, stsp21_tcen_range, stsp21_tcen_dstep, stsp21_tcen_vary, stsp21_tcen_defined,
+                  uesp_long1_value, uesp_long1_range, uesp_long1_dstep, uesp_long1_vary, uesp_long1_defined,
+                  uesp_long2_value, uesp_long2_range, uesp_long2_dstep, uesp_long2_vary, uesp_long2_defined,
+                  uesp_lathw_value, uesp_lathw_range, uesp_lathw_dstep, uesp_lathw_vary, uesp_lathw_defined,
+                  uesp_taper_value, uesp_taper_range, uesp_taper_dstep, uesp_taper_vary, uesp_taper_defined,
+                  uesp_temp_value, uesp_temp_range, uesp_temp_dstep, uesp_temp_vary, uesp_temp_defined,
                   #### disc
                   rdisc1_value, rdisc1_range, rdisc1_dstep, rdisc1_vary, rdisc1_defined,
                   rdisc2_value, rdisc2_range, rdisc2_dstep, rdisc2_vary, rdisc2_defined,
