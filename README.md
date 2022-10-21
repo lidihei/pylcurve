@@ -27,7 +27,7 @@ The package of cpp-subs is based on pcre, pgplot, and slalib(C version)
 if you install the pcre by using conda, then you should modified environment file of the include and lib
 
 
-- set environment variables (e.g. write them into \~/.bashrc)
+- set environment variables (e.g. write them into \~/.bashrc, or \~/.zshrc)
 - - export TRM_SOFTWARE= the_prefix_directory 
 - - export CPPFLAGS="-I$CONDA_PREFIX/include -I$TRM_SOFTWARE/include"
 - - export LDFLAGS="-L$CONDA_PREFIX/lib -L$TRM_SOFTWARE/lib"
@@ -80,6 +80,9 @@ https://cygnus.astro.warwick.ac.uk/phsaap/software
 - 5th install [pylcurve](https://github.com/lidihei/pylcurve)
 - - $ python setup.py install
 
+if you want to use the commands such as lroch, levmarq, lroches, you can write alias into the default configuration file (\~/.bashrc or \~/.zshrc)
+- For example:
+- - alias lroche="$TRM_SOFTWARE/bin/lcurve/lroche"
 
 # uninstall:
 - $ cd cpp-subs & make uninstall
