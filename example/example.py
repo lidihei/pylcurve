@@ -122,7 +122,7 @@ calc = llcurve.lc(times, expose=expose, ndiv=7,
        delta_phase = 3.e-8,  nlat1f = 50,  nlat2f = 210,  nlat1c = 50,  nlat2c = 170,  npole = True,
        nlatfill = 3,  nlngfill = 2,  lfudge = 0.07,  llo = 0.,  lhi = -50.,  phase1 = 0.018,  phase2 = 0.482,  nrad = 40,  wavelength = 600.,
        roche1 = False,  roche2 = True,  eclipse1 = True,  eclipse2 = True,  glens1 = True,  use_radii=1.,
-       tperiod = 0.40373,  gdark_bolom1 = 0.,  gdark_bolom2 = 0.,  mucrit1 = 0.,  mucrit2 = 0.,
+       tperiod = 0.40373,  gdark_bolom1 = False,  gdark_bolom2 = False,  mucrit1 = 0.,  mucrit2 = 0.,
        slimb1 = 'Claret', slimb2 = 'Claret',  mirror = False,  add_disc = False,  opaque = False,  add_spot = False,  nspot = 100,  iscale = False,
        info = True, parallel_threshold =4
           )

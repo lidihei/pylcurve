@@ -13,8 +13,10 @@ class lcurve:
         '''
         load libpylcurve
         '''
-        libpylcurve=CDLL(os.path.join(libdir, lib))
-        self.libpylcurve = libpylcurve
+        libname = os.path.join(libdir, lib)
+        self.libname = libname
+        #libpylcurve=CDLL(os.path.join(libdir, lib))
+        #self.libpylcurve = libpylcurve
 
     def lc(self, times, expose=0, ndiv=1,
        ###Binary and stars
@@ -103,7 +105,7 @@ class lcurve:
        delta_phase = 3.e-8,  nlat1f = 50,  nlat2f = 210,  nlat1c = 50,  nlat2c = 170,  npole = True,
        nlatfill = 3,  nlngfill = 2,  lfudge = 0.07,  llo = 0.,  lhi = -50.,  phase1 = 0.018,  phase2 = 0.482,  nrad = 40,  wavelength = 600.,
        roche1 = False,  roche2 = True,  eclipse1 = True,  eclipse2 = True,  glens1 = True,  use_radii=1.,
-       tperiod = 0.40373,  gdark_bolom1 = 0.,  gdark_bolom2 = 0.,  mucrit1 = 0.,  mucrit2 = 0.,
+       tperiod = 0.40373,  gdark_bolom1 = False,  gdark_bolom2 = False,  mucrit1 = 0.,  mucrit2 = 0.,
        slimb1 = 'Claret', slimb2 = 'Claret',  mirror = False,  add_disc = False,  opaque = False,  add_spot = False,  nspot = 100,  iscale = False,
        info = True, parallel_threshold=4
        ):
@@ -418,7 +420,7 @@ class lcurve:
         delta_phase, nlat1f, nlat2f, nlat1c, nlat2c, npole = c_double(delta_phase), c_int(nlat1f), c_int(nlat2f), c_int(nlat1c), c_int(nlat2c), c_bool(npole)
         nlatfill, nlngfill, lfudge, llo, lhi, phase1, phase2, nrad, wavelength = c_int(nlatfill), c_int(nlngfill), c_double(lfudge), c_double(llo), c_double(lhi), c_double(phase1), c_double(phase2), c_int(nrad), c_double(wavelength)
         roche1, roche2, eclipse1, eclipse2, glens1, use_radii = c_bool(roche1), c_bool(roche2), c_bool(eclipse1), c_bool(eclipse2), c_bool(glens1), c_bool(use_radii)
-        tperiod, gdark_bolom1, gdark_bolom2, mucrit1, mucrit2 = c_double(tperiod),c_double(gdark_bolom1),c_double(gdark_bolom2),c_double(mucrit1),c_double(mucrit2)
+        tperiod, gdark_bolom1, gdark_bolom2, mucrit1, mucrit2 = c_double(tperiod),c_bool(gdark_bolom1),c_bool(gdark_bolom2),c_double(mucrit1),c_double(mucrit2)
         mirror, add_disc, opaque, add_spot, nspot, iscale, info = c_bool(mirror), c_bool(add_disc), c_bool(opaque), c_bool(add_spot), c_int(nspot), c_bool(iscale), c_bool(info),
         #slimb1 = create_string_buffer(slimb1.encode(), size=len(slimb1))
         #slimb2 = create_string_buffer(slimb2.encode(), size=len(slimb2))
@@ -429,7 +431,8 @@ class lcurve:
         parallel_threshold = c_int(parallel_threshold)
 
         #### compute light curve
-        libpylcurve=self.libpylcurve
+        libpylcurve=CDLL(self.libname)
+        #libpylcurve=self.libpylcurve
         libpylcurve.pylcurve(
                   times, expose, ndiv, Tsize,
                   calc, lcstar1, lcdisc,
@@ -597,7 +600,8 @@ class lcurve:
         wdwarflogrv = wdwarflogrv.ctypes.data_as(POINTER(c_double*5))
         info = c_bool(info)
         parallel_threshold = c_int(parallel_threshold)
-        libpylcurve=self.libpylcurve
+        #libpylcurve=self.libpylcurve
+        libpylcurve=CDLL(self.libname)
         libpylcurve.pylcurve_smodel(psmodel, 
                       times, expose, ndiv, Tsize,
                       info,
