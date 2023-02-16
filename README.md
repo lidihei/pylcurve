@@ -77,7 +77,9 @@ https://cygnus.astro.warwick.ac.uk/phsaap/software
 - - $ make install
 
 
-- 5th install [pylcurve](https://github.com/lidihei/pylcurve)
+- 5th install [pylcurve](https://github.com/lidihei/pylcurve) (Note: pylcurve needs a modified cpp-lcurve verions. 
+If you want to install cpp-lcurve without "python setup.py install", you should dowloaded it from https://github.com/lidihei/cpp-lcurve.
+Then install cpp-lcurve by ./pyinstall )
 - - $ python setup.py install
 
 if you want to use the commands such as lroch, levmarq, lroches, you can write alias into the default configuration file (\~/.bashrc or \~/.zshrc)
