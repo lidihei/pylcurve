@@ -1,6 +1,7 @@
 # pylcurve
 This is a python wrapper of lcurve and is written by Jiao Li (lijiao@bao.ac.cn). 
 The [lcurve](https://github.com/trmrsh/cpp-lcurve) is for modelling of light curves which is written by Thomas Marsh.
+In order to use the share libary for pyclurve, a [modified lcurve version](https://github.com/lidihei/cpp-lcurve) is written. 
 
 - major modification: 
 - - trm/lcurve.h add Pparam(double value, double range, double dstep, bool vary, bool defined) and 
