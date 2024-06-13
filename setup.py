@@ -63,9 +63,8 @@ class _install(install):
         os.chdir(dir_cppcode)
         os.system(f'git clone {url}')
         if 'cpp-lcurve' in url:
-            _makefile_os = os.join(cpp-lcurve, 'src', f'Makefile_{os_name}.am')
-            _makefile = os.join(cpp-lcurve, 'src', f'Makefile.am')
-            
+            _makefile_os = os.path.join('cpp-lcurve', 'src', f'Makefile_{os_name}.am')
+            _makefile = os.path.join('cpp-lcurve', 'src', f'Makefile.am') 
             os.system(f'cp {_makefile_os} {_makefile}')
         os.chdir(dir_current)
 
