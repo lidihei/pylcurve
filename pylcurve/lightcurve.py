@@ -1,7 +1,14 @@
 import numpy as np
 from ctypes import *
 import os, sys
-#import time
+
+###Check the OS system
+import platform
+os_name = platform.system()
+if os_name =="Darwin":
+    lib_format = "dylib" # MacOS
+else:
+    lib_format = "so"  # Linux
 
 libdir = os.path.abspath(__file__)
 libdir = os.path.join(os.path.dirname(libdir), 'lib')
@@ -9,7 +16,7 @@ libdir = os.path.join(os.path.dirname(libdir), 'lib')
 
 class lcurve:
 
-    def __init__(self, libdir=libdir, lib='libpylcurve.so'):
+    def __init__(self, libdir=libdir, lib=f'libpylcurve.{lib_format}'):
         '''
         load libpylcurve
         '''
@@ -322,7 +329,7 @@ class lcurve:
             ndiv = ndiv*np.ones(Tsize, dtype=np.int32)
         else:
             ndiv = np.array(ndiv, dtype=np.int32)
-        calc, lcstar1, lcdisc, lcedge, lcspot, lcstar2 = np.empty((6, Tsize), dtype=np.float)
+        calc, lcstar1, lcdisc, lcedge, lcspot, lcstar2 = np.empty((6, Tsize), dtype=np.float64)
         ####----------------------- declare variables------------------------------------------------------
         times = times.ctypes.data_as(POINTER(c_double*Tsize))
         expose = expose.ctypes.data_as(POINTER(c_double*Tsize))
@@ -426,7 +433,7 @@ class lcurve:
         #slimb2 = create_string_buffer(slimb2.encode(), size=len(slimb2))
         pslimb1 = c_char_p(slimb1.encode())
         pslimb2 = c_char_p(slimb2.encode())
-        wdwarflogrv = np.zeros(4, dtype=np.float)
+        wdwarflogrv = np.zeros(4, dtype=np.float64)
         wdwarflogrv = wdwarflogrv.ctypes.data_as(POINTER(c_double*5))
         parallel_threshold = c_int(parallel_threshold)
 
@@ -787,7 +794,7 @@ class lcurve:
             ndiv = ndiv*np.ones(Tsize, dtype=np.int32)
         else:
             ndiv = np.array(ndiv, dtype=np.int32)
-        calc, lcstar1, lcdisc, lcedge, lcspot, lcstar2 = np.empty((6, Tsize), dtype=np.float)
+        calc, lcstar1, lcdisc, lcedge, lcspot, lcstar2 = np.empty((6, Tsize), dtype=np.float64)
         ####----------------------- declare variables------------------------------------------------------
         #smodel = create_string_buffer(smodel.encode(), size=len(smodel))
         psmodel = c_char_p(smodel.encode())
@@ -806,7 +813,7 @@ class lcurve:
         parallel_threshold = c_int(parallel_threshold)
         #libpylcurve=self.libpylcurve
         libpylcurve=CDLL(self.libname)
-        libpylcurve.pylcurve_smodel(psmodel, 
+        libpylcurve.pylcurve_smodel(psmodel,
                       times, expose, ndiv, Tsize,
                       info,
                       calc, lcstar1, lcdisc,

@@ -22,24 +22,38 @@ The package of cpp-subs is based on pcre, pgplot, and slalib(C version)
 
 # installation:
 
-- install pre
+- If you are using macOS, autoconf, automake, libtool, pcre, and llvm can be installed by brew
+- - brew install autoconf automake libtool pcre llvm
+note: glibtoolize is in libtool; [install brew](https://brew.sh)
+
+- - PGPLOT can be installed by using [mesasdk](http://user.astro.wisc.edu/~townsend/static.php?ref=mesasdk#Prerequisites). This is the easiest way for me to install PGPLOT
+
+- install the pacakages by conda, e.g.
 - - $conda install -c anaconda pcre
 
-if you install the pcre by using conda, then you should modified environment file of the include and lib
-
+if you install the packages by using conda, then you should modify environment file of the include and lib:
 
 - set environment variables (e.g. write them into \~/.bashrc, or \~/.zshrc)
-- - export TRM_SOFTWARE= the_prefix_directory 
+- - export TRM_SOFTWARE= the_prefix_directory (e.g. "/Users/pcname/TRM_SOFTWARE/local") 
 - - export CPPFLAGS="-I$CONDA_PREFIX/include -I$TRM_SOFTWARE/include"
 - - export LDFLAGS="-L$CONDA_PREFIX/lib -L$TRM_SOFTWARE/lib"
-- - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib
+- - export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
+
+if the dependence packages are installed by brew or the other methods (for MacOS):
+- - export PGPLOT_DIR="/Applications/mesasdk/lib/pgplot"
+- - export PGPLOT_FONT="$PGPLOT_DIR/grfont.dat
+- - export TRM_SOFTWARE= the_prefix_directory
+- - export CPPFLAGS="-I/usr/local/include -I$TRM_SOFTWARE/include -I/opt/homebrew/include -I$PGPLOT_DIR -I$PGPLOT_DIR"
+- - export LDFLAGS="-L/opt/homebrew/lib -L$TRM_SOFTWARE/lib -L$PGPLOT_DIR"
+- - export LD_LIBRARY_PATH=$PGPLOT_DIR:$CONDA_PREFIX/lib:/opt/homebrew/lib:$LD_LIBRARY_PATH
+
 
 - install slalib (C version)
 - - should ask Tom Marsh Warwick (T.R.Marsh@warwick.ac.uk) to get this package
 - - $ tar -xcf sla.tar.gz
 - - $ cd sla-1.0.5
 - - $ autoreconf -f -i -s
-- - $ ./configure --prefix=$CONDA_PREFIX
+- - $ ./configure --prefix=$TRM_SOFTWARE
 - - $ make
 - - $ make install
 

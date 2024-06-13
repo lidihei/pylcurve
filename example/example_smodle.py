@@ -9,9 +9,9 @@ import time
 
 tt = time.time()
 
-times = np.array([0,1], dtype=np.float)
-expose = np.array([2,2], dtype=np.float)/24/3600
-ndiv = np.array([1,1], dtype=np.float)
+times = np.array([0,1], dtype=np.float64)
+expose = np.array([2,2], dtype=np.float64)/24/3600
+ndiv = np.array([1,1], dtype=np.float64)
 data = np.loadtxt('example_data_file')
 times = data[:, 0]
 expose = data[:, 1]

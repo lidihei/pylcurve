@@ -6,6 +6,15 @@ import numpy
 import subprocess
 from distutils.command.install import install
 
+###Check the OS system
+import platform
+os_name = platform.system()
+if os_name =="Darwin":
+    lib_format = "dylib" # MacOS
+else:
+    lib_format = "so"  # Linux
+
+
 dir_current = os.path.dirname(os.path.abspath(__file__))
 
 #### write a Makefile from Makefile_pyclurve######
@@ -35,7 +44,7 @@ class _install(install):
                 _continue = False
         return _continue
 
-    
+
     def install_cpp_code(self, dir_cppcode, dir_current=dir_current):
         ''' install the cpp code of lcurves e.g. cpp-lcurve'''
         print(f'change working directory to: {dir_cppcode} \n\n')
@@ -54,23 +63,21 @@ class _install(install):
         os.chdir(dir_cppcode)
         os.system(f'git clone {url}')
         os.chdir(dir_current)
-        
-        
-        
+
     def lib_cpp_code(self, dir_cppcode, dir_current=dir_current):
         ''' produce the dynamice libarary of lcurves
         '''
         print(f'#-------------------------start make {dir_cppcode} lib------------------------\n\n')
         #dircode = os.path.join(dir_current, 'srcs', dir_cppcode, 'src')
         #libs = os.path.join(dir_current, 'srcs', dir_cppcode, 'src', '.libs', '*.so')
-        libs = os.path.join('$TRM_SOFTWARE', 'lib', 'libpylcurve.so')
+        libs = os.path.join('$TRM_SOFTWARE', 'lib', f'libpylcurve.{lib_format}')
         libpy = os.path.join(dir_current, 'pylcurve', 'lib')
         #subprocess.call(['make',  '-C', dircode])
         #os.system(f'cp {libs} {libpy}')
         os.system(f'cp {libs} {libpy}')
         #subprocess.call(['make', 'clean', '-C', dircode])
         print(f'#-------------------------end make {dir_cppcode} lib--------------------------\n\n\n')
- 
+
     def run(self):
         _continue = self.set_environ()
         if _continue: self.download_code()
@@ -117,7 +124,7 @@ setup(
         classifiers= [
             "Development Status :: beta",
             "Intended Audience :: Education",
-            "Programming Language :: Python :: 3.8",
+            "Programming Language :: Python :: 3.11",
             "Topic :: Scientific/Engineering :: Physics",
             "Topic :: Scientific/Engineering :: Astronomy"
         ],
@@ -128,7 +135,7 @@ setup(
         #             'fits': './fits',
         #             'results': './results'
                     },
-        package_data={'pylcurve': ['./lib/*.so'],
+        package_data={'pylcurve': [f'./lib/*.{lib_format}'],
                       },
         ##headers=['csstpsf/Centroid/libCentroid/nrutil.h'],
         ##ext_modules=[ext],

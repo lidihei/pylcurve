@@ -6,7 +6,7 @@ import time
 import matplotlib.pyplot as plt
 
 
-argurs = '''times, expose, ndiv, q_value, q_range, q_dstep, q_vary, q_defined, iangle_value, 
+argurs = '''times, expose, ndiv, q_value, q_range, q_dstep, q_vary, q_defined, iangle_value,
 iangle_range, iangle_dstep, iangle_vary, iangle_defined, r1_value, r1_range, r1_dstep, r1_vary, r1_defined, r2_value, r2_range, r2_dstep, r2_vary, r2_defined, cphi3_value, cphi3_ran
 ge, cphi3_dstep, cphi3_vary, cphi3_defined, cphi4_value, cphi4_range, cphi4_dstep, cphi4_vary, cphi4_defined, spin1_value, spin1_range, spin1_dstep, spin1_vary, spin1_defined, spin2
 _value, spin2_range, spin2_dstep, spin2_vary, spin2_defined, teff1_value, teff1_range, teff1_dstep, teff1_vary, teff1_defined, teff2_value, teff2_range, teff2_dstep, teff2_vary, tef
