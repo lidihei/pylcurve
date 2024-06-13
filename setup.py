@@ -62,6 +62,11 @@ class _install(install):
         print(f'-------------------download: {dir_cppcode}---------------------------------\n\n')
         os.chdir(dir_cppcode)
         os.system(f'git clone {url}')
+        if 'cpp-lcurve' in url:
+            _makefile_os = os.join(cpp-lcurve, 'src', f'Makefile_{os_name}.am')
+            _makefile = os.join(cpp-lcurve, 'src', f'Makefile.am')
+            
+            os.system(f'cp {_makefile_os} {_makefile}')
         os.chdir(dir_current)
 
     def lib_cpp_code(self, dir_cppcode, dir_current=dir_current):
