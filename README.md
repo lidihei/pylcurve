@@ -24,7 +24,7 @@ The package of cpp-subs is based on pcre, pgplot, and slalib(C version)
 
 - If you are using macOS, autoconf, automake, libtool, pcre, and llvm can be installed by brew
 - - brew install autoconf automake libtool pcre llvm
-note: glibtoolize is in libtool; [install brew](https://brew.sh)
+- - - note: glibtoolize is in libtool; [install brew](https://brew.sh)
 
 - - PGPLOT can be installed by using [mesasdk](http://user.astro.wisc.edu/~townsend/static.php?ref=mesasdk#Prerequisites). This is the easiest way for me to install PGPLOT
 
