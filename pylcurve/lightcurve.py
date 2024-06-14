@@ -807,7 +807,7 @@ class lcurve:
         lcedge = lcedge.ctypes.data_as(POINTER(c_double*Tsize))
         lcspot = lcspot.ctypes.data_as(POINTER(c_double*Tsize))
         lcstar2 = lcstar2.ctypes.data_as(POINTER(c_double*Tsize))
-        wdwarflogrv = np.zeros(4, dtype=np.float)
+        wdwarflogrv = np.zeros(4, dtype=np.float64)
         wdwarflogrv = wdwarflogrv.ctypes.data_as(POINTER(c_double*5))
         info = c_bool(info)
         parallel_threshold = c_int(parallel_threshold)

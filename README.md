@@ -39,7 +39,7 @@ if you install the packages by using conda, then you should modify environment f
 - - export LDFLAGS="-L$CONDA_PREFIX/lib -L$TRM_SOFTWARE/lib"
 - - export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
 
-if the dependence packages are installed by brew or the other methods (for MacOS):
+if the dependence packages are installed by brew or the other methods (for MacOS-Silicon):
 - - export PGPLOT_DIR="/Applications/mesasdk/lib/pgplot"
 - - export PGPLOT_FONT="$PGPLOT_DIR/grfont.dat
 - - export TRM_SOFTWARE= the_prefix_directory
@@ -54,8 +54,8 @@ if the dependence packages are installed by brew or the other methods (for MacOS
 - - $ cd sla-1.0.5
 - - $ autoreconf -f -i -s
 - - $ ./configure --prefix=$TRM_SOFTWARE
-- - $ make
 - - $ make install
+- - $ make clean
 
 The file called 'Lcurve' that is generated in this directory defines
 aliases (csh-style) and prints a help message when sourced.
@@ -67,29 +67,28 @@ https://cygnus.astro.warwick.ac.uk/phsaap/software
 - - $ cd cpp-subs
 - - $ autoreconf -f -i -s
 - - $ ./configure --prefix=$TRM_SOFTWARE
-- - $ make
 - - $ make install
+- - $ make clean
 
 - 2nd, install colly (can be download from [cpp-colly](https://github.com/trmrsh/cpp-colly))
 - - $ cd cpp-colly
 - - $ autoreconf -f -i -s
 - - $ ./configure --prefix=$TRM_SOFTWARE
 - - $ make install
-- - $ make
 
 - 3rd, install binary (can be download from [cpp-binary](https://github.com/trmrsh/cpp-binary))
 - - $ cd cpp-binary
 - - $ autoreconf -f -i -s
 - - $ ./configure --prefix=$TRM_SOFTWARE
-- - $ make
 - - $ make install
+- - $ make clean
 
 - 4th, install roche (can be download from [cpp-roche](https://github.com/trmrsh/cpp-roche))
 - - $ cd cpp-roche
 - - $ autoreconf -f -i -s
 - - $ ./configure --prefix=$TRM_SOFTWARE
-- - $ make
 - - $ make install
+- - $ make clean
 
 
 - 5th install [pylcurve](https://github.com/lidihei/pylcurve) (Note: pylcurve needs a modified cpp-lcurve version. 
